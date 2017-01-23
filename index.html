@@ -1,0 +1,47 @@
+
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>NG Component</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+   <script src="https://code.angularjs.org/2.0.0-beta.0/angular2-polyfills.js"></script>
+    <script src="https://code.angularjs.org/tools/system.js"></script>
+    <script src="https://code.angularjs.org/tools/typescript.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.0/Rx.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.0/angular2.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.0/router.js"></script>
+   
+    <style>
+     .selected {
+         background-color:gray;
+      }
+     .container {
+          padding-top: 80px;
+      } 
+      body {
+          background: #2d2d30;
+          color: black;
+      }
+      .bg-1 h3 {color: #fff;}
+
+    </style>
+    <script>
+      System.config({
+        transpiler: 'typescript',
+        typescriptOptions: { emitDecoratorMetadata: true },
+        packages: {'app': {defaultExtension: 'ts'}},
+        map: { 'app': 'app' }
+      });
+      System.import('app/app')
+            .then(null, console.error.bind(console));
+    </script>
+  </head>
+<body>
+   <my-app>Loading...</my-app>
+</body>
+</html>
+
