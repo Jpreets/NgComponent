@@ -11,6 +11,7 @@ import {BandComponent} from  "app/examples/band/BandComponent";
 import {TabComponent} from   "app/examples/tab/TabComponent";
 import {GridComponent} from  "app/examples/grid/GridComponent";
 import {PopupComponent} from "app/examples/popup/PopupComponent";
+import {FormComponent} from "app/examples/Form/FormComponent";
 
 
 
@@ -24,7 +25,8 @@ import {PopupComponent} from "app/examples/popup/PopupComponent";
     {path: '/',        component: BandComponent, as: 'Home'},
     {path: '/TabComponent', component: TabComponent, as: 'TabComponent'  },
     {path: '/PopupComponent', component: PopupComponent, as: 'PopupComponent'  },
-    {path: '/GridComponent', component: GridComponent, as: 'GridComponent'  }
+    {path: '/GridComponent', component: GridComponent, as: 'GridComponent'  },
+    {path: '/FormComponent', component: FormComponent, as: 'FormComponent'  }
 ])
 
 class RootComponent{

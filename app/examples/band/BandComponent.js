@@ -49,6 +49,11 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                             img: '../images/tab.png',
                             label: 'Band',
                             link: '/'
+                        },
+                        {
+                            img: '../images/form.png',
+                            label: 'Forms',
+                            link: '/FormComponent'
                         }
                     ];
                 }

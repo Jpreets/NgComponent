@@ -1,0 +1,25 @@
+
+<form (ngSubmit)="onSubmit()" #contactForm="ngForm" novalidate>
+      
+      <div class="form-group" *ngFor="#prop of model">
+        <div [ngSwitch]=prop.type>
+        <label>{{prop.label}}</label>
+         
+          <div *ngSwitchWhen="'combo'">
+            <ng-select [select_data]="prop">Loading...</ng-select>
+          </div>
+          <div *ngSwitchWhen="'textarea'">
+            <textarea class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
+                ngControl="lastname" ></textarea>
+          </div>
+          <div *ngSwitchDefault>
+              <input type={{prop.type}} class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
+              ngControl="lastname" > 
+          </div>
+        </div>
+       
+      </div>
+     
+      <button type="submit" class="btn btn-primary" [disabled]="!contactForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-primary" (click)="newContact()">New Contact</button>
+</form>

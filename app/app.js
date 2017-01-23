@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router', "app/examples/band/BandComponent", "app/examples/tab/TabComponent", "app/examples/grid/GridComponent", "app/examples/popup/PopupComponent"], function(exports_1, context_1) {
+System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router', "app/examples/band/BandComponent", "app/examples/tab/TabComponent", "app/examples/grid/GridComponent", "app/examples/popup/PopupComponent", "app/examples/Form/FormComponent"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var browser_1, core_1, router_1, BandComponent_1, TabComponent_1, GridComponent_1, PopupComponent_1;
+    var browser_1, core_1, router_1, BandComponent_1, TabComponent_1, GridComponent_1, PopupComponent_1, FormComponent_1;
     var RootComponent;
     return {
         setters:[
@@ -34,6 +34,9 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
             },
             function (PopupComponent_1_1) {
                 PopupComponent_1 = PopupComponent_1_1;
+            },
+            function (FormComponent_1_1) {
+                FormComponent_1 = FormComponent_1_1;
             }],
         execute: function() {
             // Root Component
@@ -50,7 +53,8 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                         { path: '/', component: BandComponent_1.BandComponent, as: 'Home' },
                         { path: '/TabComponent', component: TabComponent_1.TabComponent, as: 'TabComponent' },
                         { path: '/PopupComponent', component: PopupComponent_1.PopupComponent, as: 'PopupComponent' },
-                        { path: '/GridComponent', component: GridComponent_1.GridComponent, as: 'GridComponent' }
+                        { path: '/GridComponent', component: GridComponent_1.GridComponent, as: 'GridComponent' },
+                        { path: '/FormComponent', component: FormComponent_1.FormComponent, as: 'FormComponent' }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], RootComponent);

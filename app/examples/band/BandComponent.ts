@@ -45,6 +45,11 @@ export class BandComponent {
             img:'../images/tab.png',
             label:'Band',
             link:'/'
+        },
+        {
+            img:'../images/form.png',
+            label:'Forms',
+            link:'/FormComponent'
         }
     ];
 

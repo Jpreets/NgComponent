@@ -16,6 +16,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
     </div>
   `
 })
+
 export class NgTab {
   @Input() title: string;
   @Input() active = false;
