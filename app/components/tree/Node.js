@@ -11,7 +11,7 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, common_1;
-    var Node, NgTree;
+    var Node;
     return {
         setters:[
             function (core_1_1) {
@@ -24,13 +24,14 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
             Node = (function () {
                 function Node() {
                     this.IsExpanded = false;
+                    console.log(this.item);
                 }
+                Node.prototype.onInit = function () {
+                    console.log(this.item);
+                };
                 Node.prototype.toggle = function () {
                     this.IsExpanded = !this.IsExpanded;
                     console.log(this.IsExpanded + " " + this.item.label);
-                };
-                Node.prototype.ngOnInit = function () {
-                    console.log(this.item); // here it prints the actual value
                 };
                 __decorate([
                     core_1.Input(), 
@@ -40,34 +41,14 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
                     core_1.Component({
                         selector: 'node',
                         directives: [common_1.CORE_DIRECTIVES, Node],
-                        template: "\n        <li>\n                <a class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\">add</i>{{item.label}},{{IsExpanded}}</a>\n                <div *ngIf=\"IsExpanded\">\n                <ul *ngIf=\"item.subs\">\n                        <div *ngFor=\"#subitem of item.subs\">\n                                <node [item]=\"subitem\"></node>\n                        </div>\n                </ul>\n                </div>\n        </li>\n        "
+                        template: "\n        <li>\n                <a class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\">add</i>{{item.label}},{{IsExpanded}}</a>\n                <div *ngIf=\"IsExpanded\">\n                <ul *ngIf=\"item.subs\">\n                        <template *ngFor=\"#subitem of item.subs\">\n                                <node [item]=\"subitem\"></node>\n                        </template>\n                </ul>\n                </div>\n        </li>\n        "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], Node);
                 return Node;
             }());
-            NgTree = (function () {
-                function NgTree() {
-                }
-                NgTree.prototype.ngOnInit = function () {
-                    console.log(this.data); // here it prints the actual value
-                };
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Array)
-                ], NgTree.prototype, "data", void 0);
-                NgTree = __decorate([
-                    core_1.Component({
-                        selector: 'ng-tree',
-                        directives: [common_1.CORE_DIRECTIVES, Node],
-                        template: "\n        <ul>\n                <div *ngFor=\"#item of data\">\n                        <node [item]=\"item\"></node>\n                </div>\n        </ul>\n        "
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], NgTree);
-                return NgTree;
-            }());
-            exports_1("NgTree", NgTree);
+            exports_1("Node", Node);
         }
     }
 });
-//# sourceMappingURL=NgTree.js.map
+//# sourceMappingURL=Node.js.map

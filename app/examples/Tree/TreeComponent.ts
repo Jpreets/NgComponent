@@ -10,23 +10,45 @@ import {CORE_DIRECTIVES} from 'angular2/common'
 export class TreeComponent{ 
     
     tree_data = [
-                    {
-                        name:"parent1",
-                        child:[
-                            {name:"firstchild"},
-                            {name:"secondchild"}
-                        ]
-                    },
-                    {
-                        name:"parent2",
-                        child:[
-                            {name:"firstchild"},
-                            {name:"secondchild"},
-                            {name:"thirdchild"}
-                        ]
-                    }
-                    
-                ];
+		{
+			label: 'a1',
+			subs: [
+				{
+					label: 'a11',
+					subs: [
+						{
+							label: 'a111',
+							subs: [
+								{
+									label: 'a1111'
+								},
+								{
+									label: 'a1112'
+								}
+							]
+						},
+						{
+							label: 'a112'
+						}
+					]
+				},
+				{
+					label: 'a12',
+				}
+			]
+		},
+		{
+			label: 'b1',
+			subs: [
+				{
+					label: 'b11',
+				},
+				{
+					label: 'b12',
+				}
+			]
+		}
+	];
                 
 
 } 

@@ -28,18 +28,41 @@ System.register(["angular2/core", "app/components/tree/NgTree", 'angular2/common
                 function TreeComponent() {
                     this.tree_data = [
                         {
-                            name: "parent1",
-                            child: [
-                                { name: "firstchild" },
-                                { name: "secondchild" }
+                            label: 'a1',
+                            subs: [
+                                {
+                                    label: 'a11',
+                                    subs: [
+                                        {
+                                            label: 'a111',
+                                            subs: [
+                                                {
+                                                    label: 'a1111'
+                                                },
+                                                {
+                                                    label: 'a1112'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            label: 'a112'
+                                        }
+                                    ]
+                                },
+                                {
+                                    label: 'a12',
+                                }
                             ]
                         },
                         {
-                            name: "parent2",
-                            child: [
-                                { name: "firstchild" },
-                                { name: "secondchild" },
-                                { name: "thirdchild" }
+                            label: 'b1',
+                            subs: [
+                                {
+                                    label: 'b11',
+                                },
+                                {
+                                    label: 'b12',
+                                }
                             ]
                         }
                     ];

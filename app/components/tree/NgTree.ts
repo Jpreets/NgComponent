@@ -1,62 +1,54 @@
 import {Pipe,PipeTransform,Component,Input,NgSwitch,NgSwitchWhen,NgSwitchDefault,NgModule} from "angular2/core"
-
-@Pipe({name: 'keys'})
-class KeysPipe implements PipeTransform {
-  transform(value, args:string[]) : any {
-    let keys = [];
-    for (let key in value) {
-      keys.push({key: key, value: value[key]});
-    }
-    console.log(keys);
-    return keys;
-  }
-}
+import {CORE_DIRECTIVES} from "angular2/common"
 
 @Component({
-    selector:'ng-tree',
-    template:`
-        <ul>
-            <li *ngFor="#dir of data">
-               <span><input type="checkbox" [checked]="checked" (click)="check()"/></span> 
-               <span (click)="toggle()">{{ dir.name }}</span> 
-               <div *ngIf="expanded"> 
-                    <ul > 
-                        <li *ngFor="#file of dir.child">{{file.name}}</li> 
-                    </ul> 
-                    <ng-tree [data]="tree_data"></ng-tree>
+	selector: 'node',
+	directives: [CORE_DIRECTIVES, Node],
+	template: `
+        <li>
+                <a class ="iconButton" (click)="toggle()"> <i class="material-icons">add</i>{{item.label}},{{IsExpanded}}</a>
+                <div *ngIf="IsExpanded">
+                <ul *ngIf="item.subs">
+                        <div *ngFor="#subitem of item.subs">
+                                <node [item]="subitem"></node>
+                        </div>
+                </ul>
                 </div>
-            </li>
-            
-        </ul>
-    `,
-    pipes:[KeysPipe]
+        </li>
+        `
 })
 
-export class NgTree {
+class Node {
+	@Input() item;
+  IsExpanded: boolean = false;
+	
+	toggle() {
+   this.IsExpanded = !this.IsExpanded;
+   console.log(this.IsExpanded+" " + this.item.label);
+   
+  }
+    ngOnInit() {
+	    console.log(this.item); // here it prints the actual value
+	  }
+}
 
-    @Input() data:[];
-    name: string; 
-    expanded:boolean;
-    checked:boolean;
 
-    constructor() { 
-        this.expanded = false; 
-        this.checked = false; 
-    }
+@Component({
+	selector: 'ng-tree',
+	directives: [CORE_DIRECTIVES, Node],
+	template: `
+        <ul>
+                <div *ngFor="#item of data">
+                        <node [item]="item"></node>
+                </div>
+        </ul>
+        `
+})
 
-    toggle(){ 
-        console.log(this.expanded);
-        this.expanded = !this.expanded; 
-    } 
-    check(){
-        let newState = !this.checked; 
-        this.checked = newState; 
-        this.checkRecursive(newState); 
-    } 
-    checkRecursive(state){ 
-        this.data.forEach(d => {
-             this.checked = state; 
-             this.checkRecursive(state); 
-        }) 
+export class NgTree{
+    @Input() data: [];
+
+    ngOnInit() {
+	    console.log(this.data); // here it prints the actual value
     }
 }
