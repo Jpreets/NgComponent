@@ -16,9 +16,15 @@ class KeysPipe implements PipeTransform {
     selector:'ng-tree',
     template:`
         <ul>
-            <li *ngFor="#entry of data | keys">Key: {{entry.key}}, value: {{entry.value.name}}
-               <ul> <li *ngFor="#temp of entry.value.child">value: {{temp.name}}</li>
-                </ul>
+            <li *ngFor="#dir of data">
+               <span><input type="checkbox" [checked]="checked" (click)="check()"/></span> 
+               <span (click)="toggle()">{{ dir.name }}</span> 
+               <div *ngIf="expanded"> 
+                    <ul > 
+                        <li *ngFor="#file of dir.child">{{file.name}}</li> 
+                    </ul> 
+                    <ng-tree [data]="tree_data"></ng-tree>
+                </div>
             </li>
             
         </ul>
@@ -29,4 +35,28 @@ class KeysPipe implements PipeTransform {
 export class NgTree {
 
     @Input() data:[];
+    name: string; 
+    expanded:boolean;
+    checked:boolean;
+
+    constructor() { 
+        this.expanded = false; 
+        this.checked = false; 
+    }
+
+    toggle(){ 
+        console.log(this.expanded);
+        this.expanded = !this.expanded; 
+    } 
+    check(){
+        let newState = !this.checked; 
+        this.checked = newState; 
+        this.checkRecursive(newState); 
+    } 
+    checkRecursive(state){ 
+        this.data.forEach(d => {
+             this.checked = state; 
+             this.checkRecursive(state); 
+        }) 
+    }
 }

@@ -37,7 +37,25 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             }());
             NgTree = (function () {
                 function NgTree() {
+                    this.expanded = false;
+                    this.checked = false;
                 }
+                NgTree.prototype.toggle = function () {
+                    console.log(this.expanded);
+                    this.expanded = !this.expanded;
+                };
+                NgTree.prototype.check = function () {
+                    var newState = !this.checked;
+                    this.checked = newState;
+                    this.checkRecursive(newState);
+                };
+                NgTree.prototype.checkRecursive = function (state) {
+                    var _this = this;
+                    this.data.forEach(function (d) {
+                        _this.checked = state;
+                        _this.checkRecursive(state);
+                    });
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Array)
@@ -45,7 +63,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgTree = __decorate([
                     core_1.Component({
                         selector: 'ng-tree',
-                        template: "\n        <ul>\n            <li *ngFor=\"#entry of data | keys\">Key: {{entry.key}}, value: {{entry.value.name}}\n               <ul> <li *ngFor=\"#temp of entry.value.child\">value: {{temp.name}}</li>\n                </ul>\n            </li>\n            \n        </ul>\n    ",
+                        template: "\n        <ul>\n            <li *ngFor=\"#dir of data\">\n               <span><input type=\"checkbox\" [checked]=\"checked\" (click)=\"check()\"/></span> \n               <span (click)=\"toggle()\">{{ dir.name }}</span> \n               <div *ngIf=\"expanded\"> \n                    <ul > \n                        <li *ngFor=\"#file of dir.child\">{{file.name}}</li> \n                    </ul> \n                    <ng-tree [data]=\"tree_data\"></ng-tree>\n                </div>\n            </li>\n            \n        </ul>\n    ",
                         pipes: [KeysPipe]
                     }), 
                     __metadata('design:paramtypes', [])
