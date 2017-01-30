@@ -11,7 +11,7 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, common_1;
-    var Node, NgTree;
+    var DemoNumber, Node, NgTree;
     return {
         setters:[
             function (core_1_1) {
@@ -21,10 +21,36 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
                 common_1 = common_1_1;
             }],
         execute: function() {
+            DemoNumber = (function () {
+                function DemoNumber() {
+                }
+                DemoNumber.prototype.transform = function (value, args) {
+                    var res = [];
+                    for (var i = 0; i < value; i++) {
+                        res.push(i);
+                    }
+                    return res;
+                };
+                DemoNumber = __decorate([
+                    core_1.Pipe({ name: 'demoNumber' }), 
+                    __metadata('design:paramtypes', [])
+                ], DemoNumber);
+                return DemoNumber;
+            }());
+            exports_1("DemoNumber", DemoNumber);
             Node = (function () {
                 function Node() {
                     this.IsExpanded = false;
+                    this.depth = 0;
                 }
+                Node.prototype.createRange = function (number) {
+                    console.log("Hi" + number);
+                    this.items = [];
+                    for (var i = 1; i <= number; i++) {
+                        this.items.push(i);
+                    }
+                    return this.items;
+                };
                 Node.prototype.toggle = function () {
                     this.IsExpanded = !this.IsExpanded;
                     console.log(this.IsExpanded + " " + this.item.label);
@@ -36,11 +62,16 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
                     core_1.Input(), 
                     __metadata('design:type', Object)
                 ], Node.prototype, "item", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], Node.prototype, "depth", void 0);
                 Node = __decorate([
                     core_1.Component({
                         selector: 'node',
                         directives: [common_1.CORE_DIRECTIVES, Node],
-                        template: "\n        <li>\n                <a class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\">add</i>{{item.label}},{{IsExpanded}}</a>\n                <div *ngIf=\"IsExpanded\">\n                <ul *ngIf=\"item.subs\">\n                        <div *ngFor=\"#subitem of item.subs\">\n                                <node [item]=\"subitem\"></node>\n                        </div>\n                </ul>\n                </div>\n        </li>\n        "
+                        template: "\n        <li class=\"list-group-item\">\n            <span *ngFor='#key of depth | demoNumber'>--</span>\n            <input type=\"checkbox\">\n            <a *ngIf=\"!IsExpanded\" class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\">play_arrow</i>{{item.label}},{{IsExpanded}}-{{depth}}</a>\n            <a *ngIf=\"IsExpanded\" class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\">arrow_drop_down</i>{{item.label}},{{IsExpanded}}-{{depth}}</a>\n        </li>   \n        <div *ngIf=\"item.subs && IsExpanded\" >\n                <div *ngFor=\"#subitem of item.subs\">\n                      <node [item]=\"subitem\" [depth] = \"depth+1\"></node>\n                </div>\n        </div>\n        \n        ",
+                        pipes: [DemoNumber]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], Node);
@@ -49,9 +80,6 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
             NgTree = (function () {
                 function NgTree() {
                 }
-                NgTree.prototype.ngOnInit = function () {
-                    console.log(this.data); // here it prints the actual value
-                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Array)
@@ -60,7 +88,7 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
                     core_1.Component({
                         selector: 'ng-tree',
                         directives: [common_1.CORE_DIRECTIVES, Node],
-                        template: "\n        <ul>\n                <div *ngFor=\"#item of data\">\n                        <node [item]=\"item\"></node>\n                </div>\n        </ul>\n        "
+                        template: "\n        \n        <div class=\"container\">\n            <ul>\n                    <div *ngFor=\"#item of data\">\n                            <node [item]=\"item\"></node><br>\n                    </div>\n            </ul>\n        </div>\n        "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgTree);
