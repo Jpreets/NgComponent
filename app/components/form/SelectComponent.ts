@@ -3,10 +3,10 @@ import {Component,Input} from "angular2/core"
 @Component({
 	selector:'ng-select',
 	template:`
-		<select *ngIf="select_data.key=='id'">
+		<select *ngIf="select_data.key=='id'" class="form-control">
 			<option *ngFor="#data of select_data.data" id={{data.id}} value={{data.value}}>{{data.value}}</option>
 		</select>
-		<select *ngIf="select_data.key=='value'">
+		<select *ngIf="select_data.key=='value'" class="form-control">
 			<option *ngFor="#data of select_data.data" id={{data.value}} value={{data.id}}>{{data.id}}</option>
 		</select>
 	`

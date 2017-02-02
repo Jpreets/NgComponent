@@ -36,9 +36,24 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                             link: '/TabComponent'
                         },
                         {
+                            img: '../images/tab.png',
+                            label: 'Band',
+                            link: '/'
+                        },
+                        {
+                            img: '../images/tree.jpeg',
+                            label: 'Panels',
+                            link: '/PanelComponent'
+                        },
+                        {
                             img: '../images/table.png',
                             label: 'Grid',
                             link: '/GridComponent'
+                        },
+                        {
+                            img: '../images/tree.jpeg',
+                            label: 'Tree View',
+                            link: '/TreeComponent'
                         },
                         {
                             img: '../images/popup.png',
@@ -46,19 +61,9 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                             link: '/PopupComponent'
                         },
                         {
-                            img: '../images/tab.png',
-                            label: 'Band',
-                            link: '/'
-                        },
-                        {
                             img: '../images/form.png',
                             label: 'Forms',
                             link: '/FormComponent'
-                        },
-                        {
-                            img: '../images/tree.jpeg',
-                            label: 'Tree View',
-                            link: '/TreeComponent'
                         }
                     ];
                 }
