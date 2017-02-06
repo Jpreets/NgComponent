@@ -32,82 +32,31 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgPane
                     this.panelData = [
                         {
                             type: 'default',
-                            header: 'default<br>ddd',
-                            body: 'Helllo<hr>test'
+                            header: 'default Colapsible',
+                            colapsable: true
                         }, {
                             type: 'primary',
-                            header: 'primary',
-                            body: 'Helllo<hr>test'
+                            header: 'primary Colapsible',
+                            colapsable: true
                         }, {
                             type: 'success',
-                            header: 'success',
-                            body: 'Helllo<hr>test'
+                            header: 'success Colapsible',
+                            colapsable: true
                         }, {
                             type: 'info',
                             header: 'info',
-                            body: 'Helllo<hr>test'
                         }, {
                             type: 'warning',
                             header: 'warning',
-                            body: 'Helllo<hr>test'
                         }, {
                             type: 'danger',
                             header: 'danger',
-                            body: ''
                         }
                     ];
-                    this.title = 'My Grid';
-                    this.selectedRecord = {};
-                    this.columns = [
-                        { id: 'name', value: 'Name' },
-                        { id: 'email', value: 'Email' },
-                        { id: 'phone', value: 'Phone' },
-                        { id: 'sex', value: 'Sex' },
-                        { id: 't', value: 'Test' }
-                    ];
-                    this.data = [{
-                            id: 1,
-                            name: 'Jaspreet',
-                            email: 'jpreet.singh20@gmail.com',
-                            phone: '990099009900',
-                            sex: 'Male',
-                            t: '12345'
-                        },
-                        {
-                            id: 2,
-                            name: 'Jaspreet',
-                            email: 'jpreet.singh20@gmail.com',
-                            phone: '990099009900',
-                            sex: 'Male'
-                        },
-                        {
-                            id: 3,
-                            name: 'Jaspreet',
-                            email: 'jpreet.singh20@gmail.com',
-                            phone: '990099009900',
-                            sex: 'Male'
-                        },
-                        {
-                            id: 4,
-                            name: 'Jaspreet',
-                            email: 'jpreet.singh20@gmail.com',
-                            phone: '990099009900',
-                            sex: 'Male'
-                        },
-                        {
-                            id: 5,
-                            name: 'Jaspreet',
-                            email: 'jpreet.singh20@gmail.com',
-                            phone: '990099009900',
-                            sex: 'Male'
-                        },];
                 }
-                PanelComponent.prototype.getSelectedRecord = function (event) {
-                    this.selectedRecord = event;
-                };
                 PanelComponent = __decorate([
                     core_1.Component({
-                        template: "\n          <ng-panel  *ngFor=\"#record of panelData\"\n           [type]=\"record.type\"\n           [header]=\"record.header\"\n           >\n            <ng-grid [title]=\"title\" [data]=\"data\" [columns]=\"columns\" (onSelectionChange)=\"getSelectedRecord($event);\" ></ng-grid>\n            </ng-panel>\n    ",
+                        template: "\n          <ng-panel  *ngFor=\"#record of panelData\"\n           [type]=\"record.type\"\n           [header]=\"record.header\"\n           [colapsable]=\"record.colapsable\"\n           >\n           {{record.header}}\n           </ng-panel>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgPanel_1.NgPanel, NgGrid_1.NgGrid]
                     }), 
                     __metadata('design:paramtypes', [])

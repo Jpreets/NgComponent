@@ -32,7 +32,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 SelectComponent = __decorate([
                     core_1.Component({
                         selector: 'ng-select',
-                        template: "\n\t\t<select *ngIf=\"select_data.key=='id'\">\n\t\t\t<option *ngFor=\"#data of select_data.data\" id={{data.id}} value={{data.value}}>{{data.value}}</option>\n\t\t</select>\n\t\t<select *ngIf=\"select_data.key=='value'\">\n\t\t\t<option *ngFor=\"#data of select_data.data\" id={{data.value}} value={{data.id}}>{{data.id}}</option>\n\t\t</select>\n\t"
+                        template: "\n\t\t<select *ngIf=\"select_data.key=='id'\" class=\"form-control\">\n\t\t\t<option *ngFor=\"#data of select_data.data\" id={{data.id}} value={{data.value}}>{{data.value}}</option>\n\t\t</select>\n\t\t<select *ngIf=\"select_data.key=='value'\" class=\"form-control\">\n\t\t\t<option *ngFor=\"#data of select_data.data\" id={{data.value}} value={{data.id}}>{{data.id}}</option>\n\t\t</select>\n\t"
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SelectComponent);
