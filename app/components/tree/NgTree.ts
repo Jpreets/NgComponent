@@ -21,7 +21,7 @@ export class DemoNumber implements PipeTransform {
             <span *ngIf="item.checked"><input type="checkbox" (click)="checkData()" checked></span>
             <span *ngIf="!item.checked"><input type="checkbox" (click)="checkData()"></span>
             <a *ngIf="!item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons">play_arrow</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
-            <a *ngIf="item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
+            <a *ngIf="item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons" style="font-size: 35px;">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
         </li>   
         <div *ngIf="(item.subs && item.expandable)" >
                 <div *ngFor="#subitem of item.subs">
@@ -74,9 +74,14 @@ class Node {
 	template: `
         
         <div class="container">
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="lead"> Tree View </span><br>
+        </div>
+        </div>
             <ul>
                     <div *ngFor="#item of data">
-                            <node [item]="item" (dataUpdated)="handleDataUpdated($event)"></node><br>
+                            <node [item]="item" (dataUpdated)="handleDataUpdated($event)"></node>
                     </div>
             </ul>
         </div>
