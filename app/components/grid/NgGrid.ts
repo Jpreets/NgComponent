@@ -7,7 +7,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 @Component({
    selector: 'ng-grid',
   template:` 
-  <div class="container">
+ 
         <div class="generic-container">
             <div class="panel panel-default">
                 <!-- Default panel contents -->
@@ -33,7 +33,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
                     </table>
                 </div>
             </div>
-        </div>
+       
     </div>` ,
  directives: [CORE_DIRECTIVES]
 

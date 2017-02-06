@@ -49,7 +49,7 @@ System.register(['angular2/core', 'angular2/common', 'app/components/tab/NgTab']
                 NgTabs = __decorate([
                     core_1.Component({
                         selector: 'ng-tabs',
-                        template: "\n    <ul class=\"nav nav-tabs\">\n      <li *ngFor=\"#tab of tabs\" (click)=\"selectTab(tab)\" [class.active]=\"tab.active\">\n         <a href=\"#\">{{tab.title}}</a>\n       </li>\n    </ul>\n        <ng-content></ng-content>\n\n  ",
+                        template: "\n    <ul class=\"nav nav-tabs\">\n      <li *ngFor=\"#tab of tabs\" (click)=\"selectTab(tab)\" [class.active]=\"tab.active\">\n         <a >{{tab.title}}</a>\n       </li>\n    </ul>\n        <ng-content></ng-content>\n\n  ",
                         directives: [common_1.CORE_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [])
@@ -60,4 +60,4 @@ System.register(['angular2/core', 'angular2/common', 'app/components/tab/NgTab']
         }
     }
 });
-//# sourceMappingURL=NGTabs.js.map
+//# sourceMappingURL=NgTabs.js.map

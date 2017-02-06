@@ -1,6 +1,7 @@
 
 import {bootstrap} from 'angular2/platform/browser';
-import {Component, ContentChildren, QueryList, AfterContentInit, Input ,Output,EventEmitter,
+import { Component, ContentChildren,
+   QueryList, AfterContentInit, Input ,Output,EventEmitter,
   View,DynamicComponentLoader,ElementRef,Inject,OnInit,provide} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
@@ -13,7 +14,7 @@ import {GridComponent} from  "app/examples/grid/GridComponent";
 import {PopupComponent} from "app/examples/popup/PopupComponent";
 import {FormComponent} from "app/examples/Form/FormComponent";
 import {TreeComponent} from "app/examples/Tree/TreeComponent";
-
+import {PanelComponent} from  "app/examples/band/PanelComponent";
 
 
 // Root Component
@@ -28,7 +29,8 @@ import {TreeComponent} from "app/examples/Tree/TreeComponent";
     {path: '/PopupComponent', component: PopupComponent, as: 'PopupComponent'  },
     {path: '/GridComponent', component: GridComponent, as: 'GridComponent'  },
     {path: '/FormComponent', component: FormComponent, as: 'FormComponent'  },
-    {path: '/TreeComponent', component: TreeComponent, as: 'TreeComponent'  }
+    {path: '/TreeComponent', component: TreeComponent, as: 'TreeComponent'  },
+    {path: '/PanelComponent', component: PanelComponent, as: 'PanelComponent'  },
 ])
 
 class RootComponent{
