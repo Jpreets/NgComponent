@@ -44,7 +44,7 @@ export class NgGrid {
   @Input() public title='';
   @Input() public columns=[];
   @Input() public data=[];
-   public selectedRecord = {};
+  public selectedRecord = {};
 
   @Output() onSelectionChange = new EventEmitter();
 

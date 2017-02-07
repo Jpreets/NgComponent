@@ -16,12 +16,13 @@ export class DemoNumber implements PipeTransform {
 	selector: 'node',
 	directives: [CORE_DIRECTIVES, Node],
 	template: `
-        <li class="list-group-item">
-            <span *ngFor='#key of depth | demoNumber'>--</span>
+        <li class="list-group-item" (click)="selectRow(item)" 
+            [ngClass]="{selected: item.id === selectedItem.id}">
+            <span *ngFor='#key of depth | demoNumber'>&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span *ngIf="item.checked"><input type="checkbox" (click)="checkData()" checked></span>
             <span *ngIf="!item.checked"><input type="checkbox" (click)="checkData()"></span>
             <a *ngIf="!item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons">play_arrow</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
-            <a *ngIf="item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons" style="font-size: 35px;">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
+            <a *ngIf="item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons" style="font-size: 35px;margin-top:10px;">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
         </li>   
         <div *ngIf="(item.subs && item.expandable)" >
                 <div *ngFor="#subitem of item.subs">
@@ -40,9 +41,15 @@ class Node {
 
   @Output() dataUpdated = new EventEmitter();
 
+  public selectedItem = {};
+
   checkData(){
     this.item.checked = !this.item.checked;
     this.dataUpdated.emit(this.item);
+  }
+
+  selectRow(record) {
+    this.selectedItem= record;
   }
 
   createRange(number){

@@ -43,10 +43,14 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
                     this.IsExpanded = false;
                     this.depth = 0;
                     this.dataUpdated = new core_1.EventEmitter();
+                    this.selectedItem = {};
                 }
                 Node.prototype.checkData = function () {
                     this.item.checked = !this.item.checked;
                     this.dataUpdated.emit(this.item);
+                };
+                Node.prototype.selectRow = function (record) {
+                    this.selectedItem = record;
                 };
                 Node.prototype.createRange = function (number) {
                     console.log("Hi" + number);
@@ -81,7 +85,7 @@ System.register(["angular2/core", "angular2/common"], function(exports_1, contex
                     core_1.Component({
                         selector: 'node',
                         directives: [common_1.CORE_DIRECTIVES, Node],
-                        template: "\n        <li class=\"list-group-item\">\n            <span *ngFor='#key of depth | demoNumber'>--</span>\n            <span *ngIf=\"item.checked\"><input type=\"checkbox\" (click)=\"checkData()\" checked></span>\n            <span *ngIf=\"!item.checked\"><input type=\"checkbox\" (click)=\"checkData()\"></span>\n            <a *ngIf=\"!item.expandable\" class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\">play_arrow</i>{{item.label}},{{item.expandable}}-{{depth}}</a>\n            <a *ngIf=\"item.expandable\" class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\" style=\"font-size: 35px;\">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>\n        </li>   \n        <div *ngIf=\"(item.subs && item.expandable)\" >\n                <div *ngFor=\"#subitem of item.subs\">\n                      <node [item]=\"subitem\" [depth] = \"depth+1\" (dataUpdated)=\"handleDataUpdated($event)\"></node>\n                </div>\n        </div>\n        \n        ",
+                        template: "\n        <li class=\"list-group-item\" (click)=\"selectRow(item)\" \n            [ngClass]=\"{selected: item.id === selectedItem.id}\">\n            <span *ngFor='#key of depth | demoNumber'>&nbsp;&nbsp;&nbsp;&nbsp;</span>\n            <span *ngIf=\"item.checked\"><input type=\"checkbox\" (click)=\"checkData()\" checked></span>\n            <span *ngIf=\"!item.checked\"><input type=\"checkbox\" (click)=\"checkData()\"></span>\n            <a *ngIf=\"!item.expandable\" class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\">play_arrow</i>{{item.label}},{{item.expandable}}-{{depth}}</a>\n            <a *ngIf=\"item.expandable\" class =\"iconButton\" (click)=\"toggle()\"> <i class=\"material-icons\" style=\"font-size: 35px;margin-top:10px;\">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>\n        </li>   \n        <div *ngIf=\"(item.subs && item.expandable)\" >\n                <div *ngFor=\"#subitem of item.subs\">\n                      <node [item]=\"subitem\" [depth] = \"depth+1\" (dataUpdated)=\"handleDataUpdated($event)\"></node>\n                </div>\n        </div>\n        \n        ",
                         pipes: [DemoNumber]
                     }), 
                     __metadata('design:paramtypes', [])
