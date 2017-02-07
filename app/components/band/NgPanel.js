@@ -25,15 +25,7 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                 function NgPanel() {
                     this.type = 'default';
                     this.header = 'default';
-                    this.colapsable = false;
-                    this.active = { bool: true };
                 }
-                NgPanel.prototype.colapse = function () {
-                    if (!this.colapsable) {
-                        return;
-                    }
-                    this.active.bool = !this.active.bool;
-                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Object)
@@ -42,18 +34,10 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                     core_1.Input(), 
                     __metadata('design:type', Object)
                 ], NgPanel.prototype, "header", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Boolean)
-                ], NgPanel.prototype, "colapsable", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
-                ], NgPanel.prototype, "active", void 0);
                 NgPanel = __decorate([
                     core_1.Component({
                         selector: 'ng-panel',
-                        template: "\n  <div class=\"panel panel-{{type}}\">\n      <div class=\"panel-heading\" [innerHTML]=\"header\" (click)=\"colapse()\" ></div>\n       <div class=\"panel-body\" *ngIf=\"active.bool\" >\n        <ng-content></ng-content>\n       </div>\n  </div>\n  ",
+                        template: "\n  <div class=\"panel panel-{{type}}\">\n      <div class=\"panel-heading\" [innerHTML]=\"header\"></div>\n       <div class=\"panel-body\" >\n        <ng-content></ng-content>\n       </div>\n  </div>\n  ",
                         directives: [common_1.CORE_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [])
