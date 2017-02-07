@@ -31,37 +31,37 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                 function BandComponent() {
                     this.bandData = [
                         {
-                            img: '../images/tab.png',
+                            img: 'images/tab.png',
                             label: 'Tabs',
                             link: '/TabComponent'
                         },
                         {
-                            img: '../images/tab.png',
+                            img: 'images/tab.png',
                             label: 'Band',
                             link: '/'
                         },
                         {
-                            img: '../images/tree.jpeg',
+                            img: 'images/tree.jpeg',
                             label: 'Panels',
                             link: '/PanelComponent'
                         },
                         {
-                            img: '../images/table.png',
+                            img: 'images/table.png',
                             label: 'Grid',
                             link: '/GridComponent'
                         },
                         {
-                            img: '../images/tree.jpeg',
+                            img: 'images/tree.jpeg',
                             label: 'Tree View',
                             link: '/TreeComponent'
                         },
                         {
-                            img: '../images/popup.png',
+                            img: 'images/popup.png',
                             label: 'Popup',
                             link: '/PopupComponent'
                         },
                         {
-                            img: '../images/form.png',
+                            img: 'images/form.png',
                             label: 'Forms',
                             link: '/FormComponent'
                         }

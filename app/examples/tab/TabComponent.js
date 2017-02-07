@@ -32,7 +32,7 @@ System.register(['angular2/core', 'angular2/common', "app/components/tab/NGTabs"
                 }
                 TabComponent = __decorate([
                     core_1.Component({
-                        template: "\n     <ng-tabs>\n        <ng-tab [title]=\"'Tab1'\"> Tab1 Detail </ng-tab>\n        <ng-tab [title]=\"'Tab2'\"> Tab2 Detail </ng-tab>\n        <ng-tab [title]=\"'Tab3'\"> Tab3 Detail </ng-tab>\n        <ng-tab [title]=\"'Tab4'\"> Tab4 Detail </ng-tab>\n    </ng-tabs>\n    ",
+                        template: "\n     <ng-tabs>\n        <ng-tab [title]=\"'Home'\"> \n            <h3>HOME</h3>\n              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>\n         </ng-tab>\n        <ng-tab [title]=\"'Menu 1'\"> \n            <h3>Menu 1</h3>\n              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n        </ng-tab>\n        <ng-tab [title]=\"'Menu 2'\">     \n          <h3>Menu 2</h3>\n              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n       </ng-tab>\n        <ng-tab [title]=\"'Menu 3'\">     \n          <h3>Menu 3</h3>\n              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n      </ng-tab>\n    </ng-tabs>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NGTabs_1.NgTabs, NgTab_1.NgTab]
                     }), 
                     __metadata('design:paramtypes', [])

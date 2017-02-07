@@ -60,4 +60,4 @@ System.register(['angular2/core', 'angular2/common', 'app/components/tab/NgTab']
         }
     }
 });
-//# sourceMappingURL=NGTabs.js.map
+//# sourceMappingURL=NgTabs.js.map
