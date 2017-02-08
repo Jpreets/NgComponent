@@ -1,4 +1,5 @@
-import {Output,EventEmitter,Pipe,PipeTransform,Component,Input,NgSwitch,NgSwitchWhen,NgSwitchDefault,NgModule} from "angular2/core"
+import {Output,EventEmitter,Pipe,PipeTransform,Component,
+  Input,NgSwitch,NgSwitchWhen,NgSwitchDefault,NgModule} from "angular2/core"
 import {CORE_DIRECTIVES} from "angular2/common"
 
 @Pipe({name: 'demoNumber'})
@@ -15,19 +16,34 @@ export class DemoNumber implements PipeTransform {
 @Component({
 	selector: 'node',
 	directives: [CORE_DIRECTIVES, Node],
+  styles: [`
+    .list-group-item:last-child {
+        margin-bottom: -1px;
+    }
+  `],
 	template: `
         <li class="list-group-item" (click)="selectRow(item)" 
-            [ngClass]="{selected: item.id === selectedItem.id}">
-            <span *ngFor='#key of depth | demoNumber'>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span *ngIf="item.checked"><input type="checkbox" (click)="checkData()" checked></span>
-            <span *ngIf="!item.checked"><input type="checkbox" (click)="checkData()"></span>
-            <a *ngIf="!item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons">play_arrow</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
-            <a *ngIf="item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons" style="font-size: 35px;margin-top:10px;">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
+         [ngClass]="{selected: item.checked}">
+            
+          <span *ngFor='#key of depth | demoNumber'>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+           
+           <i  [ngClass]="item.checked ?'fa fa-check-square-o' : 'fa fa-square-o'"
+                   style="font-size:20px" 
+                   (click)="checkData()"
+                   aria-hidden="true"></i>
+
+            <span (click)="toggle()" style="vertical-align: text-bottom;"> 
+                <i  [ngClass]="item.expandable? 'fa fa-play fa-rotate-90' : 'fa fa-play'"
+                   style="color:#337ab7;font-size:12px" aria-hidden="true"></i>
+                {{item.label}}
+            </span>
+           
         </li>   
         <div *ngIf="(item.subs && item.expandable)" >
-                <div *ngFor="#subitem of item.subs">
-                      <node [item]="subitem" [depth] = "depth+1" (dataUpdated)="handleDataUpdated($event)"></node>
-                </div>
+              <node *ngFor="#subitem of item.subs"
+                      [item]="subitem" [depth] = "depth+1"
+                       (dataUpdated)="handleDataUpdated($event)"></node>
+             
         </div>
         
         `,
@@ -37,7 +53,7 @@ export class DemoNumber implements PipeTransform {
 class Node {
 	@Input() item;
   IsExpanded: boolean = false;
-  @Input() depth: int 0;
+  @Input() depth = 0;
 
   @Output() dataUpdated = new EventEmitter();
 
@@ -80,18 +96,12 @@ class Node {
 	directives: [CORE_DIRECTIVES, Node],
 	template: `
         
-        <div class="container">
         <div class="panel panel-default">
         <div class="panel-heading">
             <span class="lead"> Tree View </span><br>
-        </div>
-        </div>
-            <ul>
-                    <div *ngFor="#item of data">
-                            <node [item]="item" (dataUpdated)="handleDataUpdated($event)"></node>
-                    </div>
-            </ul>
-        </div>
+           </div>
+            <node  *ngFor="#item of data" [item]="item" (dataUpdated)="handleDataUpdated($event)"></node>
+          </div>
         `
 })
 
