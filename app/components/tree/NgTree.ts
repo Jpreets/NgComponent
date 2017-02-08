@@ -45,7 +45,6 @@ export class DemoNumber implements PipeTransform {
                 {{item.label}}
             </span>
            
->>>>>>> f6f25669a47220c2e89ba293132b8412045547c0
         </li>   
         <div *ngIf="(item.subs && item.expandable)" >
               <node *ngFor="#subitem of item.subs"
@@ -104,7 +103,6 @@ class Node {
 	directives: [CORE_DIRECTIVES, Node],
 	template: `
         
-<<<<<<< HEAD
         <div class="container">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -117,15 +115,13 @@ class Node {
               </ul>
           </div>
         </div>
-=======
         <div class="panel panel-default">
         <div class="panel-heading">
             <span class="lead"> Tree View </span><br>
            </div>
             <node  *ngFor="#item of data" [item]="item" (dataUpdated)="handleDataUpdated($event)"></node>
           </div>
->>>>>>> f6f25669a47220c2e89ba293132b8412045547c0
-        `
+       `
 })
 
 export class NgTree{
