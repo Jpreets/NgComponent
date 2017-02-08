@@ -11,31 +11,31 @@ export class TreeComponent{
     
     tree_data = [
 		{
-			label: 'a1',
+			label: 'A',
 			id:1,
-			expandable:true,
+			expandable:false,
 			checked:false,
 			subs: [
 				{
-					label: 'a11',
+					label: 'A.A',
 					id:1.1,
 					expandable:false,
 					checked:false,
 					subs: [
 						{
-							label: 'a111',
+							label: 'A.A.A',
 							id:1.11,
 							expandable:false,
 							checked:false,
 							subs: [
 								{
-									label: 'a1111',
+									label: 'A.A.A.A',
 									id:1.111,
 									expandable:false,
 									checked:true
 								},
 								{
-									label: 'a1112',
+									label: 'A.A.A.B',
 									id:1.112,
 									expandable:false,
 									checked:false
@@ -43,7 +43,7 @@ export class TreeComponent{
 							]
 						},
 						{
-							label: 'a112',
+							label: 'A.A.B',
 							id:1.12,
 							expandable:false,
 							checked:false
@@ -51,7 +51,7 @@ export class TreeComponent{
 					]
 				},
 				{
-					label: 'a12',
+					label: 'A.B',
 					id:1.2,
 					expandable:true,
 					checked:false
@@ -59,19 +59,19 @@ export class TreeComponent{
 			]
 		},
 		{
-			label: 'b1',
+			label: 'B',
 			id:2,
 			expandable:false,
 			checked:true,
 			subs: [
 				{
-					label: 'b11',
+					label: 'B.A',
 					id:2.1,
 					expandable:false,
 					checked:true
 				},
 				{
-					label: 'b12',
+					label: 'B.B',
 					id:2.2,
 					expandable:false,
 					checked:true
