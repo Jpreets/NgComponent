@@ -16,13 +16,13 @@ export class DemoNumber implements PipeTransform {
 	selector: 'node',
 	directives: [CORE_DIRECTIVES, Node],
 	template: `
-        <li class="list-group-item" (click)="selectRow(item)" 
-            [ngClass]="{selected: item.id === selectedItem.id}">
+        <li class="list-group-item" (click)="selectRow(item)"
+                 [ngClass]="{selected: item.id === selectedItem.id}">
             <span *ngFor='#key of depth | demoNumber'>&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span *ngIf="item.checked"><input type="checkbox" (click)="checkData()" checked></span>
             <span *ngIf="!item.checked"><input type="checkbox" (click)="checkData()"></span>
             <a *ngIf="!item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons">play_arrow</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
-            <a *ngIf="item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons" style="font-size: 35px;margin-top:10px;">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
+            <a *ngIf="item.expandable" class ="iconButton" (click)="toggle()"> <i class="material-icons">arrow_drop_down</i>{{item.label}},{{item.expandable}}-{{depth}}</a>
         </li>   
         <div *ngIf="(item.subs && item.expandable)" >
                 <div *ngFor="#subitem of item.subs">
@@ -81,16 +81,16 @@ class Node {
 	template: `
         
         <div class="container">
-        <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="lead"> Tree View </span><br>
-        </div>
-        </div>
-            <ul>
-                    <div *ngFor="#item of data">
-                            <node [item]="item" (dataUpdated)="handleDataUpdated($event)"></node>
-                    </div>
-            </ul>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="lead"> Tree View </span><br>
+            </div>
+              <ul>
+                      <div *ngFor="#item of data">
+                              <node [item]="item" (dataUpdated)="handleDataUpdated($event)"></node>
+                      </div>
+              </ul>
+          </div>
         </div>
         `
 })
