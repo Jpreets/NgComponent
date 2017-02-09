@@ -65,6 +65,11 @@ export class BandComponent {
             img:'images/form.png',
             label:'Lists',
             link:'/ListComponent'
+        },
+        {
+            img:'images/form.png',
+            label:'CheckBox',
+            link:'/CheckBoxComponent'
         }
        
     ];

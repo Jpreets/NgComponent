@@ -16,6 +16,7 @@ import {FormComponent} from "app/examples/Form/FormComponent";
 import {TreeComponent} from "app/examples/Tree/TreeComponent";
 import {PanelComponent} from  "app/examples/band/PanelComponent";
 import {ListComponent} from  "app/examples/Form/ListComponent";
+import {CheckBoxComponent} from  "app/examples/CheckBox/CheckBoxComponent";
 
 
 // Root Component
@@ -34,6 +35,7 @@ import {ListComponent} from  "app/examples/Form/ListComponent";
     {path: '/TreeComponent', component: TreeComponent, as: 'TreeComponent'  },
     {path: '/PanelComponent', component: PanelComponent, as: 'PanelComponent'  },
     {path: '/ListComponent', component: ListComponent, as: 'ListComponent'  },
+    {path: '/CheckBoxComponent', component: CheckBoxComponent, as: 'CheckBoxComponent'  },
 
 ])
 

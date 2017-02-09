@@ -3,7 +3,7 @@ import {Component, ContentChildren, QueryList, AfterContentInit, Input ,Output,E
   View,DynamicComponentLoader,ElementRef,Inject,OnInit} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {NgTabs} from "app/components/tab/NGTabs" ;
+import {NgTabs} from "app/components/tab/NgTabs" ;
 import {NgTab} from  "app/components/tab/NgTab";
 
 
