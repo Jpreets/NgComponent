@@ -32,7 +32,7 @@ export class DemoNumber implements PipeTransform {
                    (click)="checkData()"
                    aria-hidden="true"></i>
 
-            <span (click)="toggle()" style="vertical-align: text-bottom;"> 
+            <span (click)="toggle()" style="vertical-align: text-bottom;4r"> 
                 <i  [ngClass]="item.expandable? 'fa fa-play fa-rotate-90' : 'fa fa-play'"
                    style="color:#337ab7;font-size:12px" aria-hidden="true"></i>
                 {{item.label}}

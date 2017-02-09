@@ -15,6 +15,7 @@ import {PopupComponent} from "app/examples/popup/PopupComponent";
 import {FormComponent} from "app/examples/Form/FormComponent";
 import {TreeComponent} from "app/examples/Tree/TreeComponent";
 import {PanelComponent} from  "app/examples/band/PanelComponent";
+import {ListComponent} from  "app/examples/Form/ListComponent";
 
 
 // Root Component
@@ -25,12 +26,15 @@ import {PanelComponent} from  "app/examples/band/PanelComponent";
 })
 @RouteConfig([
     {path: '/',        component: BandComponent, as: 'Home'},
+    {path: '/BandComponent',        component: BandComponent, as: 'BandComponent'},
     {path: '/TabComponent', component: TabComponent, as: 'TabComponent'  },
     {path: '/PopupComponent', component: PopupComponent, as: 'PopupComponent'  },
     {path: '/GridComponent', component: GridComponent, as: 'GridComponent'  },
     {path: '/FormComponent', component: FormComponent, as: 'FormComponent'  },
     {path: '/TreeComponent', component: TreeComponent, as: 'TreeComponent'  },
     {path: '/PanelComponent', component: PanelComponent, as: 'PanelComponent'  },
+    {path: '/ListComponent', component: ListComponent, as: 'ListComponent'  },
+
 ])
 
 class RootComponent{

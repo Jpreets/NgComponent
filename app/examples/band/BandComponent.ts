@@ -60,6 +60,11 @@ export class BandComponent {
             img:'images/form.png',
             label:'Forms',
             link:'/FormComponent'
+        },
+        {
+            img:'images/form.png',
+            label:'Lists',
+            link:'/ListComponent'
         }
        
     ];
