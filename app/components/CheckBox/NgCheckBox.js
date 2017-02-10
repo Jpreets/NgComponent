@@ -22,7 +22,24 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 function NgCheckBox() {
                 }
                 NgCheckBox.prototype.checkData = function (key) {
-                    this.value = key.id;
+                    console.log(this.value);
+                    flag = 0;
+                    for (var i = 0; i < this.value.length; i++) {
+                        if (key.id == this.value[i]) {
+                            this.value.splice(this.value.indexOf(key.id), 1);
+                            flag = 1;
+                        }
+                    }
+                    if (flag == 0)
+                        this.value.push(key.id);
+                };
+                NgCheckBox.prototype.checkValue = function (key) {
+                    for (var i = 0; i < this.value.length; i++) {
+                        if (key.id == this.value[i]) {
+                            return true;
+                        }
+                    }
+                    return false;
                 };
                 NgCheckBox.prototype.ngOnInit = function () {
                     console.log(this.data);
@@ -39,12 +56,12 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 ], NgCheckBox.prototype, "name", void 0);
                 __decorate([
                     core_1.Input(), 
-                    __metadata('design:type', Object)
+                    __metadata('design:type', Array)
                 ], NgCheckBox.prototype, "value", void 0);
                 NgCheckBox = __decorate([
                     core_1.Component({
                         selector: 'ng-checkbox',
-                        template: "\n        <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <span class=\"lead\"> CheckBox </span><br>\n           </div>\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"key.id==value ?'fa fa-check-square-o' : 'fa fa-square-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\">{{key.value}}</i>\n               <br><br>\n            </div>\n         </div>\n    ",
+                        template: "\n        <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <span class=\"lead\"> CheckBox </span><br>\n           </div>\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"checkValue(key) ?'fa fa-check-square-o' : 'fa fa-square-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\">{{key.value}}</i>\n               <br><br>\n            </div>\n         </div>\n    ",
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgCheckBox);

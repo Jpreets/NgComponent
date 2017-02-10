@@ -74,6 +74,11 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                             img: 'images/form.png',
                             label: 'CheckBox',
                             link: '/CheckBoxComponent'
+                        },
+                        {
+                            img: 'images/form.png',
+                            label: 'RadioButtons',
+                            link: '/RadioButtonsComponent'
                         }
                     ];
                 }

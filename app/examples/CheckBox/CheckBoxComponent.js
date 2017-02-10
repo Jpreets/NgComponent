@@ -31,7 +31,7 @@ System.register(["angular2/core", 'angular2/common', "app/components/CheckBox/Ng
                         { id: 1, value: "Bike" },
                         { id: 2, value: "Car" }
                     ];
-                    this.value = 1;
+                    this.value = [1];
                 }
                 CheckBoxComponent = __decorate([
                     core_1.Component({

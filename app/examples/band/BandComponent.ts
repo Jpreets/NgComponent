@@ -70,6 +70,11 @@ export class BandComponent {
             img:'images/form.png',
             label:'CheckBox',
             link:'/CheckBoxComponent'
+        },
+        {
+            img:'images/form.png',
+            label:'RadioButtons',
+            link:'/RadioButtonsComponent'
         }
        
     ];

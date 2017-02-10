@@ -14,5 +14,5 @@ export class CheckBoxComponent {
         {id:1,value:"Bike"},
         {id:2,value:"Car"}
     ];
-    value=1;
+    value=[1];
 }
