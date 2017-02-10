@@ -23,29 +23,13 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     this.data = [];
                     this.multiselect = false;
                     this.selectable = false;
-                    this.selectedRecord = [];
+                    this.selectedRecord = { id: 0 };
                     this.onSelectionChange = new core_1.EventEmitter();
                 }
-                NgList.prototype.checkRecord = function (rec) {
-                    for (var i = 0; i < this.selectedRecord.length; i++) {
-                        if (rec.id == this.selectedRecord[i].id) {
-                            return true;
-                        }
-                    }
-                    return false;
-                };
                 NgList.prototype.selectRow = function (record) {
                     if (!this.selectable)
                         return;
-                    flag = 0;
-                    for (var i = 0; i < this.selectedRecord.length; i++) {
-                        if (record.id == this.selectedRecord[i].id) {
-                            this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
-                            flag = 1;
-                        }
-                    }
-                    if (flag == 0)
-                        this.selectedRecord.push(record);
+                    this.selectedRecord = record;
                     this.onSelectionChange.emit(this.selectedRecord);
                 };
                 __decorate([
@@ -67,7 +51,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgList = __decorate([
                     core_1.Component({
                         selector: 'ng-list',
-                        template: "\n    <div class=\"list-group\">\n      <div \n        *ngFor=\"#rec of data\" \n                (click)=\"selectRow(rec)\"\n        [ngClass]=\"rec.disable?\n        'list-group-item list-group-item-'+rec.type+' disabled':\n        'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec)?'selected':'') \"\n        [innerHTML]=\"rec.body\" \n         ></div>\n      </div>\n    "
+                        template: "\n\t<div class=\"list-group\">\n  \t  <div \n\t\t*ngFor=\"#rec of data\" \n\t\t[ngClass]=\"rec.disable?\n\t\t'list-group-item list-group-item-'+rec.type+' disabled':\n\t\t'list-group-item list-group-item-'+rec.type +' '+(rec.id==selectedRecord.id?'selected':'') \"\n\t\t[innerHTML]=\"rec.body\"\n\t\t (click)=\"selectRow(rec)\" \n\t\t ></div>\n\t  </div>\n\t"
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgList);
