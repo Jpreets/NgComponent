@@ -5,13 +5,15 @@ import {CORE_DIRECTIVES} from 'angular2/common'
 
 @Component({
 	template: `<ng-list [data]="listData" 
-						 [selectable]="selectable">
+				[multiselect]="multiselect"
+                                    [selectable]="selectable">
 			  </ng-list>`,
 	directives: [CORE_DIRECTIVES,NgList]
 })
 
 export class ListComponent { 
 	selectable=true;
+        multiselect=true;
 	listData = [{
 		body: 'First',
 		id: 1,

@@ -21,7 +21,6 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             NgList = (function () {
                 function NgList() {
                     this.data = [];
-                    this.multiselect = false;
                     this.selectable = false;
                     this.selectedRecord = [];
                     this.onSelectionChange = new core_1.EventEmitter();
@@ -37,15 +36,25 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgList.prototype.selectRow = function (record) {
                     if (!this.selectable)
                         return;
-                    flag = 0;
-                    for (var i = 0; i < this.selectedRecord.length; i++) {
-                        if (record.id == this.selectedRecord[i].id) {
-                            this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
-                            flag = 1;
+                    if (!this.multiselect) {
+                        for (var i = 0; i < this.selectedRecord.length; i++) {
+                            rec = this.selectedRecord[i];
+                            this.selectedRecord.splice(this.selectedRecord.indexOf(rec), 1);
                         }
-                    }
-                    if (flag == 0)
                         this.selectedRecord.push(record);
+                        console.log(this.selectedRecord);
+                    }
+                    else {
+                        flag = 0;
+                        for (var i = 0; i < this.selectedRecord.length; i++) {
+                            if (record.id == this.selectedRecord[i].id) {
+                                this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
+                                flag = 1;
+                            }
+                        }
+                        if (flag == 0)
+                            this.selectedRecord.push(record);
+                    }
                     this.onSelectionChange.emit(this.selectedRecord);
                 };
                 __decorate([

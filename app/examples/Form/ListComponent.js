@@ -27,6 +27,7 @@ System.register(["angular2/core", "app/components/form/NgList", 'angular2/common
             ListComponent = (function () {
                 function ListComponent() {
                     this.selectable = true;
+                    this.multiselect = true;
                     this.listData = [{
                             body: 'First',
                             id: 1,
@@ -67,7 +68,7 @@ System.register(["angular2/core", "app/components/form/NgList", 'angular2/common
                 }
                 ListComponent = __decorate([
                     core_1.Component({
-                        template: "<ng-list [data]=\"listData\" \n\t\t\t\t\t\t [selectable]=\"selectable\">\n\t\t\t  </ng-list>",
+                        template: "<ng-list [data]=\"listData\" \n\t\t\t\t[multiselect]=\"multiselect\"\n                                    [selectable]=\"selectable\">\n\t\t\t  </ng-list>",
                         directives: [common_1.CORE_DIRECTIVES, NgList_1.NgList]
                     }), 
                     __metadata('design:paramtypes', [])

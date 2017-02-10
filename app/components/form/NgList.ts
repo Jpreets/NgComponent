@@ -19,7 +19,7 @@ import {Component,Input,Output,EventEmitter} from "angular2/core"
 export class NgList{ 
 
     @Input() data=[];
-    @Input() multiselect = false;
+    @Input() multiselect;
     @Input() selectable=false;
     public selectedRecord=[] ;
 
@@ -36,17 +36,25 @@ export class NgList{
 
      selectRow(record) {
         if(!this.selectable) return;
-                flag = 0;
-                for(var i=0;i<this.selectedRecord.length;i++){
-                    if(record.id == this.selectedRecord[i].id){
-                        this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
-                        flag = 1;
-                    }
+        if(!this.multiselect){
+            for(var i=0;i<this.selectedRecord.length;i++){
+                rec = this.selectedRecord[i];
+                this.selectedRecord.splice(this.selectedRecord.indexOf(rec), 1);
+            }
+            this.selectedRecord.push(record);
+            console.log(this.selectedRecord);
+        }else {
+            flag = 0;
+            for(var i=0;i<this.selectedRecord.length;i++){
+                if(record.id == this.selectedRecord[i].id){
+                    this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
+                    flag = 1;
                 }
-                if(flag == 0)
-                    this.selectedRecord.push(record);
-
-                this.onSelectionChange.emit(this.selectedRecord);
+            }
+            if(flag == 0)
+                this.selectedRecord.push(record);
+        }
+        this.onSelectionChange.emit(this.selectedRecord);
 
   }
 
