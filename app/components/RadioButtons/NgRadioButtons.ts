@@ -10,7 +10,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
            </div>
             <h3>{{name}}</h3>
             <div *ngFor='#key of data'>
-             <i [ngClass]="key.id==value ?'fa fa-check-square-o' : 'fa fa-square-o'"
+             <i [ngClass]="key.id==value ?'fa fa-check-circle-o' : 'fa fa-circle-o'"
                    style="font-size:20px"
                    (click)="checkData(key)"
                    aria-hidden="true">{{key.value}}</i>
