@@ -9,6 +9,8 @@ import {NgTab} from  "app/components/tab/NgTab";
 
 @Component({
     template: `
+    <h1>Tab Items</h1>
+	  <hr/>
      <ng-tabs>
         <ng-tab [title]="'Home'"> 
             <h3>HOME</h3>

@@ -79,12 +79,17 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                             img: 'images/form.png',
                             label: 'RadioButtons',
                             link: '/RadioButtonsComponent'
+                        },
+                        {
+                            img: 'images/form.png',
+                            label: 'ItemSelectorComponent',
+                            link: '/ItemSelectorComponent'
                         }
                     ];
                 }
                 BandComponent = __decorate([
                     core_1.Component({
-                        template: "\n     <ng-bands>\n         <ng-band  *ngFor=\"#record of bandData\">\n               <a  href=\"#{{record.link}}\" >\n                    <p><strong>{{record.label}}</strong></p>\n                    <img src=\"{{record.img}}\" style=\" width: 300px; height: 200px;\" >\n              </a>\n         </ng-band>\n     <ng-bands>\n    ",
+                        template: "\n    <h1>Bands</h1>\n\t  <hr/>\n     <ng-bands>\n         <ng-band  *ngFor=\"#record of bandData\">\n               <a  href=\"#{{record.link}}\" >\n                    <p><strong>{{record.label}}</strong></p>\n                    <img src=\"{{record.img}}\" style=\" width: 300px; height: 200px;\" >\n              </a>\n         </ng-band>\n     <ng-bands>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgBands_1.NgBands, NgBand_1.NgBand]
                     }), 
                     __metadata('design:paramtypes', [])

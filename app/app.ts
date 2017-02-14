@@ -16,6 +16,7 @@ import {FormComponent} from "app/examples/Form/FormComponent";
 import {TreeComponent} from "app/examples/Tree/TreeComponent";
 import {PanelComponent} from  "app/examples/band/PanelComponent";
 import {ListComponent} from  "app/examples/Form/ListComponent";
+import {ItemSelectorComponent} from  "app/examples/Form/ItemSelectorComponent";
 import {CheckBoxComponent} from  "app/examples/CheckBox/CheckBoxComponent";
 import {RadioButtonsComponent} from  "app/examples/RadioButtons/RadioButtonsComponent";
 
@@ -38,6 +39,7 @@ import {RadioButtonsComponent} from  "app/examples/RadioButtons/RadioButtonsComp
     {path: '/ListComponent', component: ListComponent, as: 'ListComponent'  },
     {path: '/CheckBoxComponent', component: CheckBoxComponent, as: 'CheckBoxComponent'  },
     {path: '/RadioButtonsComponent', component: RadioButtonsComponent, as: 'RadioButtonsComponent'  },
+    {path: '/ItemSelectorComponent', component: ItemSelectorComponent, as: 'ItemSelectorComponent'  },
 
 ])
 

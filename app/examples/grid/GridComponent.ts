@@ -9,6 +9,8 @@ import {NgGrid} from "app/components/grid/NgGrid" ;
 @Component({
  
     template: `
+    <h1>Grid's</h1>
+	  <hr/>
       <ng-grid 
                 [title]="title"
                 [data]="data" 

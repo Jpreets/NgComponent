@@ -39,7 +39,7 @@ System.register(["angular2/core", "app/components/form/NgForm", 'angular2/common
                 }
                 FormComponent = __decorate([
                     core_1.Component({
-                        template: "<ng-form [model]=\"properties\"></ng-form>",
+                        template: "\n\t<h1>Forms</h1>\n\t  <hr/>\n\t  <ng-form [model]=\"properties\"></ng-form>",
                         directives: [common_1.CORE_DIRECTIVES, NgForm_1.NgForm]
                     }), 
                     __metadata('design:paramtypes', [])

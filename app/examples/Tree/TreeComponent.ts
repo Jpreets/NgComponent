@@ -3,7 +3,10 @@ import {NgTree} from "app/components/tree/NgTree"
 import {CORE_DIRECTIVES} from 'angular2/common'
 
 @Component({
-    template:`<ng-tree [data]="tree_data" [expandItems]="expand_items" [checkedItems]="checked_items"></ng-tree>`,
+    template:`
+	<h1>Tree </h1>
+	  <hr/>
+	  <ng-tree [data]="tree_data" [expandItems]="expand_items" [checkedItems]="checked_items"></ng-tree>`,
     directives: [CORE_DIRECTIVES,NgTree]
 })
 

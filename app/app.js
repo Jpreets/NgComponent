@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router', "app/examples/band/BandComponent", "app/examples/tab/TabComponent", "app/examples/grid/GridComponent", "app/examples/popup/PopupComponent", "app/examples/Form/FormComponent", "app/examples/Tree/TreeComponent", "app/examples/band/PanelComponent", "app/examples/Form/ListComponent", "app/examples/CheckBox/CheckBoxComponent", "app/examples/RadioButtons/RadioButtonsComponent"], function(exports_1, context_1) {
+System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router', "app/examples/band/BandComponent", "app/examples/tab/TabComponent", "app/examples/grid/GridComponent", "app/examples/popup/PopupComponent", "app/examples/Form/FormComponent", "app/examples/Tree/TreeComponent", "app/examples/band/PanelComponent", "app/examples/Form/ListComponent", "app/examples/Form/ItemSelectorComponent", "app/examples/CheckBox/CheckBoxComponent", "app/examples/RadioButtons/RadioButtonsComponent"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var browser_1, core_1, router_1, BandComponent_1, TabComponent_1, GridComponent_1, PopupComponent_1, FormComponent_1, TreeComponent_1, PanelComponent_1, ListComponent_1, CheckBoxComponent_1, RadioButtonsComponent_1;
+    var browser_1, core_1, router_1, BandComponent_1, TabComponent_1, GridComponent_1, PopupComponent_1, FormComponent_1, TreeComponent_1, PanelComponent_1, ListComponent_1, ItemSelectorComponent_1, CheckBoxComponent_1, RadioButtonsComponent_1;
     var RootComponent;
     return {
         setters:[
@@ -47,6 +47,9 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
             function (ListComponent_1_1) {
                 ListComponent_1 = ListComponent_1_1;
             },
+            function (ItemSelectorComponent_1_1) {
+                ItemSelectorComponent_1 = ItemSelectorComponent_1_1;
+            },
             function (CheckBoxComponent_1_1) {
                 CheckBoxComponent_1 = CheckBoxComponent_1_1;
             },
@@ -76,6 +79,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                         { path: '/ListComponent', component: ListComponent_1.ListComponent, as: 'ListComponent' },
                         { path: '/CheckBoxComponent', component: CheckBoxComponent_1.CheckBoxComponent, as: 'CheckBoxComponent' },
                         { path: '/RadioButtonsComponent', component: RadioButtonsComponent_1.RadioButtonsComponent, as: 'RadioButtonsComponent' },
+                        { path: '/ItemSelectorComponent', component: ItemSelectorComponent_1.ItemSelectorComponent, as: 'ItemSelectorComponent' },
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], RootComponent);

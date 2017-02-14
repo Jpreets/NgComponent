@@ -56,7 +56,7 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgPane
                 }
                 PanelComponent = __decorate([
                     core_1.Component({
-                        template: "\n          <ng-panel  *ngFor=\"#record of panelData\"\n           [type]=\"record.type\"\n           [header]=\"record.header\"\n           [colapsable]=\"record.colapsable\"\n           >\n           {{record.header}}\n           </ng-panel>\n    ",
+                        template: "\n    <h1>Panels</h1>\n\t  <hr/>\n          <ng-panel  *ngFor=\"#record of panelData\"\n           [type]=\"record.type\"\n           [header]=\"record.header\"\n           [colapsable]=\"record.colapsable\"\n           >\n           {{record.header}}\n           </ng-panel>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgPanel_1.NgPanel, NgGrid_1.NgGrid]
                     }), 
                     __metadata('design:paramtypes', [])
