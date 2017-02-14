@@ -101,7 +101,7 @@ System.register(["angular2/core", "app/components/tree/NgTree", 'angular2/common
                 }
                 TreeComponent = __decorate([
                     core_1.Component({
-                        template: "<ng-tree [data]=\"tree_data\" [expandItems]=\"expand_items\" [checkedItems]=\"checked_items\"></ng-tree>",
+                        template: "\n\t<h1>Tree </h1>\n\t  <hr/>\n\t  <ng-tree [data]=\"tree_data\" [expandItems]=\"expand_items\" [checkedItems]=\"checked_items\"></ng-tree>",
                         directives: [common_1.CORE_DIRECTIVES, NgTree_1.NgTree]
                     }), 
                     __metadata('design:paramtypes', [])

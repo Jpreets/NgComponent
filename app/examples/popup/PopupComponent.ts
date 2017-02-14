@@ -8,6 +8,8 @@ import {NgPopup} from "app/components/popup/NgPopup" ;
 
 @Component({
     template: `
+    <h1>Popup's</h1>
+	  <hr/>
       <button class="btn btn-default" (click)="showPopup()">Show Popup</button>
 
           <ng-popup

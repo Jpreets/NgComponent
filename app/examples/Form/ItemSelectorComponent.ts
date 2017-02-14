@@ -1,28 +1,46 @@
 
 import {Component} from "angular2/core"
-import {NgList} from "app/components/form/NgList"
+import {NgItemSelector} from "app/components/form/NgItemSelector"
 import {CORE_DIRECTIVES} from 'angular2/common'
 
 @Component({
 	template: `
-	<h1>List</h1>
+	  <h1>Item Selector</h1>
 	  <hr/>
-	  <ng-list [data]="listData" 
-				[multiselect]="multiselect"
-                                    [selectable]="selectable">
-			  </ng-list>`,
-	directives: [CORE_DIRECTIVES,NgList]
+	<ng-itemselector 
+	[data]="listData"
+	[selectedData]="selectedData"  >
+	</ng-itemselector>
+	`,
+	directives: [CORE_DIRECTIVES,NgItemSelector]
 })
 
-export class ListComponent { 
-	selectable=true;
-        multiselect=true;
-	listData = [{
+export class ItemSelectorComponent { 
+	
+	selectedData =[{
 		body: 'First',
 		id: 1,
 		type:'default',
 		disable : false
 	},
+	{
+		body: 'Eight',
+		id: 8,
+		type:'default',
+		disable : false
+	},{
+		body: 'Nine',
+		id: 9,
+		type:'default',
+		disable : false
+	},
+	{
+		body: 'Ten',
+		id: 10,
+		type:'default',
+		disable : false
+	}];
+	listData = [
 	{
 		body: 'Second',
 		id: 2,

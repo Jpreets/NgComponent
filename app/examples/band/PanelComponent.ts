@@ -11,6 +11,8 @@ import {NgGrid} from "app/components/grid/NgGrid" ;
 
 @Component({
     template: `
+    <h1>Panels</h1>
+	  <hr/>
           <ng-panel  *ngFor="#record of panelData"
            [type]="record.type"
            [header]="record.header"

@@ -12,6 +12,8 @@ import {NgBands} from "app/components/band/NgBands" ;
 
 @Component({
     template: `
+    <h1>Bands</h1>
+	  <hr/>
      <ng-bands>
          <ng-band  *ngFor="#record of bandData">
                <a  href="#{{record.link}}" >
@@ -75,6 +77,11 @@ export class BandComponent {
             img:'images/form.png',
             label:'RadioButtons',
             link:'/RadioButtonsComponent'
+        },
+        {
+            img:'images/form.png',
+            label:'ItemSelectorComponent',
+            link:'/ItemSelectorComponent'
         }
        
     ];

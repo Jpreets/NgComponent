@@ -37,7 +37,7 @@ System.register(['angular2/core', 'angular2/common', "app/components/popup/NgPop
                 };
                 PopupComponent = __decorate([
                     core_1.Component({
-                        template: "\n      <button class=\"btn btn-default\" (click)=\"showPopup()\">Show Popup</button>\n\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n            >\n             Hello\n          </ng-popup>\n    ",
+                        template: "\n    <h1>Popup's</h1>\n\t  <hr/>\n      <button class=\"btn btn-default\" (click)=\"showPopup()\">Show Popup</button>\n\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n            >\n             Hello\n          </ng-popup>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgPopup_1.NgPopup]
                     }), 
                     __metadata('design:paramtypes', [])

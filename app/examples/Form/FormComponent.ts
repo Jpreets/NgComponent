@@ -3,7 +3,10 @@ import {NgForm} from "app/components/form/NgForm"
 import {CORE_DIRECTIVES} from 'angular2/common'
 
 @Component({
-	template: `<ng-form [model]="properties"></ng-form>`,
+	template: `
+	<h1>Forms</h1>
+	  <hr/>
+	  <ng-form [model]="properties"></ng-form>`,
 	directives: [CORE_DIRECTIVES,NgForm]
 })
 

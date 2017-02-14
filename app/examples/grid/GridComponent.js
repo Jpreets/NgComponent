@@ -77,7 +77,7 @@ System.register(['angular2/core', 'angular2/common', "app/components/grid/NgGrid
                 };
                 GridComponent = __decorate([
                     core_1.Component({
-                        template: "\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n            >\n            </ng-grid>\n    ",
+                        template: "\n    <h1>Grid's</h1>\n\t  <hr/>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n            >\n            </ng-grid>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgGrid_1.NgGrid]
                     }), 
                     __metadata('design:paramtypes', [])
