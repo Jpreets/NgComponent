@@ -4,19 +4,14 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 @Component({
     selector: 'ng-radiobuttons'
     template: `
-        <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="lead"> Radio Buttons </span><br>
-           </div>
             <h3>{{name}}</h3>
             <div *ngFor='#key of data'>
              <i [ngClass]="key.id==value ?'fa fa-check-circle-o' : 'fa fa-circle-o'"
                    style="font-size:20px"
                    (click)="checkData(key)"
-                   aria-hidden="true">{{key.value}}</i>
+                   aria-hidden="true"></i>{{key.value}}
                <br><br>
-            </div>
-         </div>
+             </div>
     `,
 })
 
