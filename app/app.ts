@@ -19,6 +19,7 @@ import {ListComponent} from  "app/examples/Form/ListComponent";
 import {ItemSelectorComponent} from  "app/examples/Form/ItemSelectorComponent";
 import {CheckBoxComponent} from  "app/examples/CheckBox/CheckBoxComponent";
 import {RadioButtonsComponent} from  "app/examples/RadioButtons/RadioButtonsComponent";
+import {CkEditorComponent} from  "app/examples/CkEditor/CkEditorComponent";
 
 
 // Root Component
@@ -40,6 +41,7 @@ import {RadioButtonsComponent} from  "app/examples/RadioButtons/RadioButtonsComp
     {path: '/CheckBoxComponent', component: CheckBoxComponent, as: 'CheckBoxComponent'  },
     {path: '/RadioButtonsComponent', component: RadioButtonsComponent, as: 'RadioButtonsComponent'  },
     {path: '/ItemSelectorComponent', component: ItemSelectorComponent, as: 'ItemSelectorComponent'  },
+    {path: '/CkEditorComponent', component: CkEditorComponent, as: 'CkEditorComponent'  },
 
 ])
 

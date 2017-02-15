@@ -1,4 +1,4 @@
-System.register(["angular2/core", "app/components/form/SelectComponent"], function(exports_1, context_1) {
+System.register(["angular2/core", "app/components/form/SelectComponent", "app/components/RadioButtons/NgRadioButtons", "app/components/CheckBox/NgCheckBox"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", "app/components/form/SelectComponent"], functi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, SelectComponent_1;
+    var core_1, SelectComponent_1, NgRadioButtons_1, NgCheckBox_1;
     var NgForm;
     return {
         setters:[
@@ -19,10 +19,23 @@ System.register(["angular2/core", "app/components/form/SelectComponent"], functi
             },
             function (SelectComponent_1_1) {
                 SelectComponent_1 = SelectComponent_1_1;
+            },
+            function (NgRadioButtons_1_1) {
+                NgRadioButtons_1 = NgRadioButtons_1_1;
+            },
+            function (NgCheckBox_1_1) {
+                NgCheckBox_1 = NgCheckBox_1_1;
             }],
         execute: function() {
             NgForm = (function () {
                 function NgForm() {
+                    this.name = "vehicles";
+                    this.data = [
+                        { id: 1, value: "Bike" },
+                        { id: 2, value: "Car" }
+                    ];
+                    this.value = 1;
+                    this.value_check = [1];
                     console.log(this.model); // here it prints `null`
                 }
                 NgForm.prototype.ngOnInit = function () {
@@ -36,7 +49,7 @@ System.register(["angular2/core", "app/components/form/SelectComponent"], functi
                     core_1.Component({
                         selector: 'ng-form',
                         templateUrl: 'app/components/form/form.html',
-                        directives: [SelectComponent_1.SelectComponent]
+                        directives: [SelectComponent_1.SelectComponent, NgRadioButtons_1.NgRadioButtons, NgCheckBox_1.NgCheckBox]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgForm);
