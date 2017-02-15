@@ -46,18 +46,47 @@ export class NgList{
             this.selectedRecord.push(record);
             console.log(this.selectedRecord);
         }else {
-            flag = 0;
-            for(var i=0;i<this.selectedRecord.length;i++){
-                if(record.id == this.selectedRecord[i].id){
-                    this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
-                    flag = 1;
+            if(this.mouseEvent.type=="click" && event.ctrlKey){
+                flag = 0;
+                for(var i=0;i<this.selectedRecord.length;i++){
+                    if(record.id == this.selectedRecord[i].id){
+                        this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
+                        flag = 1;
+                    }
                 }
-            }
-            if(flag == 0 && this.mouseEvent.type=="click" && event.ctrlKey)
+                if(flag == 0)
+                    this.selectedRecord.push(record);
+            }else if(this.mouseEvent.type=="click" && event.shiftKey){
+                if(this.selectedRecord.length == 0)
+                    this.selectedRecord.push(record);
+                else{
+                    index_start = this.selectedRecord[this.selectedRecord.length-1].id;
+                    index_end = record.id;
+                    if(index_start>index_end){
+                        tmp = index_start;
+                        index_start = index_end;
+                        index_end = tmp;
+                    }
+                    for(var i=index_start;i<=index_end;i++){
+                        this.selectedRecord.push(this.getId(i));
+                    }
+                }
+            }else if(this.mouseEvent.type=="click"){
+                this.selectedRecord = [];
                 this.selectedRecord.push(record);
+                console.log(this.selectedRecord);
+            }
         }
         this.onSelectionChange.emit(this.selectedRecord);
 
-  }
+    }
+
+    getId(i){
+        for(var j=0;j<this.data.length;j++){
+            if(this.data[j].id == i)
+                return this.data[j];
+        }
+        return 0;
+    }
 
 }
