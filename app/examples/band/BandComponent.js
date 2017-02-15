@@ -82,7 +82,7 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                         },
                         {
                             img: 'images/form.png',
-                            label: 'ItemSelectorComponent',
+                            label: 'Item Selector',
                             link: '/ItemSelectorComponent'
                         }
                     ];
