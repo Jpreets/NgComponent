@@ -35,7 +35,7 @@ System.register(["angular2/core", 'angular2/common', "app/components/CheckBox/Ng
                 }
                 CheckBoxComponent = __decorate([
                     core_1.Component({
-                        template: "<div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <span class=\"lead\"> CheckBox </span><br>\n           </div>\n            <ng-checkbox [name]=\"name\" [value]=\"value\" [data]=\"data\"></ng-checkbox>\n            </div>",
+                        template: '<ng-checkbox [name]="name" [value]="value" [data]="data"></ng-checkbox>',
                         directives: [common_1.CORE_DIRECTIVES, NgCheckBox_1.NgCheckBox]
                     }), 
                     __metadata('design:paramtypes', [])
