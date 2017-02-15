@@ -33,8 +33,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     }
                     return false;
                 };
-                NgList.prototype.selectRow = function (record, event) {
-                    this.mouseEvent = event;
+                NgList.prototype.selectRow = function (record) {
                     if (!this.selectable)
                         return;
                     if (!this.multiselect) {
@@ -73,8 +72,12 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                                 }
                             }
                         }
+<<<<<<< HEAD
                         else if (this.mouseEvent.type == "click") {
                             this.selectedRecord = [];
+=======
+                        if (flag == 0)
+>>>>>>> origin/master
                             this.selectedRecord.push(record);
                             console.log(this.selectedRecord);
                         }
@@ -107,7 +110,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgList = __decorate([
                     core_1.Component({
                         selector: 'ng-list',
-                        template: "\n    <div class=\"list-group\">\n      <div \n        *ngFor=\"#rec of data\" \n                (click)=\"selectRow(rec,$event)\"\n        [ngClass]=\"rec.disable?\n        'list-group-item list-group-item-'+rec.type+' disabled':\n        'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec)?'selected':'') \"\n        [innerHTML]=\"rec.body\" \n         ></div>\n      </div>\n    "
+                        template: "\n    <div class=\"list-group\">\n      <div \n        *ngFor=\"#rec of data\" \n                (click)=\"selectRow(rec)\"\n        [ngClass]=\"rec.disable?\n        'list-group-item list-group-item-'+rec.type+' disabled':\n        'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec)?'selected':'') \"\n        [innerHTML]=\"rec.body\" \n         ></div>\n      </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgList);

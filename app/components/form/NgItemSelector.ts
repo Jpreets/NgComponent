@@ -89,10 +89,10 @@ export class DropTargetDirective {
     >
       <div 
         *ngFor="#rec of data" 
-                (click)="selectRow(rec)"
+                (dblclick)="selectRecord(rec)"
         [ngClass]="rec.disable?
         'list-group-item list-group-item-'+rec.type+' disabled':
-        'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec,selectedRecord)?'selected':'') "
+        'list-group-item list-group-item-'+rec.type +' ' "
         [innerHTML]="rec.body" 
         [myDraggable]="{data: rec }"
        
@@ -108,10 +108,10 @@ export class DropTargetDirective {
     >
       <div 
         *ngFor="#rec of selectedData" 
-                (click)="selectRow(rec)"
+        (dblclick)="deSelectRecord(rec)"
         [ngClass]="rec.disable?
         'list-group-item list-group-item-'+rec.type+' disabled':
-        'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec,selectedRecord)?'selected':'') "
+        'list-group-item list-group-item-'+rec.type +' ' "
         [innerHTML]="rec.body" 
         [myDraggable]="{data: rec }"
        
@@ -128,32 +128,21 @@ export class DropTargetDirective {
 export class NgItemSelector{ 
 
     @Input() data=[];
-    @Input() multiselect;
-    @Input() selectable=false;
     @Input() selectedData =[];
-    public selectedRecord=[] ;
-     @Input() public dragable= false;
-     @Input() public dropable = false;
+    
 
     deSelectRecord(rec) {
-        console.log(rec)
-        console.log(this.checkRecord(rec,this.data))
         if(!this.checkRecord(rec,this.data)){
             this.data.push(rec);
             this.removeRecord(this.selectedData,rec);
 
         }
-        console.log(this.data)
     }
-
     selectRecord(rec) {
-        console.log(rec)
-        console.log(this.checkRecord(rec,this.selectedData))
         if(!this.checkRecord(rec,this.selectedData)){
             this.selectedData.push(rec);
             this.removeRecord(this.data,rec);
         }
-        console.log(this.selectedData)
     }
 
 
@@ -164,39 +153,14 @@ export class NgItemSelector{
         }
       }
     }
-    @Output() onSelectionChange = new EventEmitter();
         
-        checkRecord(rec, list){
+    checkRecord(rec, list){
             for(var i=0;i<list.length;i++){
                 if(rec.id == list[i].id){ 
                     return true;
                 }
             }
             return false;
-        }
-
-     selectRow(record) {
-        if(!this.selectable) return;
-        if(!this.multiselect){
-            for(var i=0;i<this.selectedRecord.length;i++){
-                rec = this.selectedRecord[i];
-                this.selectedRecord.splice(this.selectedRecord.indexOf(rec), 1);
-            }
-            this.selectedRecord.push(record);
-            console.log(this.selectedRecord);
-        }else {
-            flag = 0;
-            for(var i=0;i<this.selectedRecord.length;i++){
-                if(record.id == this.selectedRecord[i].id){
-                    this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
-                    flag = 1;
-                }
-            }
-            if(flag == 0)
-                this.selectedRecord.push(record);
-        }
-        this.onSelectionChange.emit(this.selectedRecord);
-
   }
 
 }

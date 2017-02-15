@@ -124,30 +124,19 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             NgItemSelector = (function () {
                 function NgItemSelector() {
                     this.data = [];
-                    this.selectable = false;
                     this.selectedData = [];
-                    this.selectedRecord = [];
-                    this.dragable = false;
-                    this.dropable = false;
-                    this.onSelectionChange = new core_1.EventEmitter();
                 }
                 NgItemSelector.prototype.deSelectRecord = function (rec) {
-                    console.log(rec);
-                    console.log(this.checkRecord(rec, this.data));
                     if (!this.checkRecord(rec, this.data)) {
                         this.data.push(rec);
                         this.removeRecord(this.selectedData, rec);
                     }
-                    console.log(this.data);
                 };
                 NgItemSelector.prototype.selectRecord = function (rec) {
-                    console.log(rec);
-                    console.log(this.checkRecord(rec, this.selectedData));
                     if (!this.checkRecord(rec, this.selectedData)) {
                         this.selectedData.push(rec);
                         this.removeRecord(this.data, rec);
                     }
-                    console.log(this.selectedData);
                 };
                 NgItemSelector.prototype.removeRecord = function (array, rec) {
                     for (var i = array.length - 1; i >= 0; i--) {
@@ -164,30 +153,6 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     }
                     return false;
                 };
-                NgItemSelector.prototype.selectRow = function (record) {
-                    if (!this.selectable)
-                        return;
-                    if (!this.multiselect) {
-                        for (var i = 0; i < this.selectedRecord.length; i++) {
-                            rec = this.selectedRecord[i];
-                            this.selectedRecord.splice(this.selectedRecord.indexOf(rec), 1);
-                        }
-                        this.selectedRecord.push(record);
-                        console.log(this.selectedRecord);
-                    }
-                    else {
-                        flag = 0;
-                        for (var i = 0; i < this.selectedRecord.length; i++) {
-                            if (record.id == this.selectedRecord[i].id) {
-                                this.selectedRecord.splice(this.selectedRecord.indexOf(record), 1);
-                                flag = 1;
-                            }
-                        }
-                        if (flag == 0)
-                            this.selectedRecord.push(record);
-                    }
-                    this.onSelectionChange.emit(this.selectedRecord);
-                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Object)
@@ -195,31 +160,11 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Object)
-                ], NgItemSelector.prototype, "multiselect", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
-                ], NgItemSelector.prototype, "selectable", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
                 ], NgItemSelector.prototype, "selectedData", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
-                ], NgItemSelector.prototype, "dragable", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
-                ], NgItemSelector.prototype, "dropable", void 0);
-                __decorate([
-                    core_1.Output(), 
-                    __metadata('design:type', Object)
-                ], NgItemSelector.prototype, "onSelectionChange", void 0);
                 NgItemSelector = __decorate([
                     core_1.Component({
                         selector: 'ng-itemselector',
-                        template: "\n <div class=\"row\">\n\t  <div class=\"col-xs-6\">\n\n<div class=\"panel panel-default\">\n    <div class=\"list-group\" style=\"height: 300px;overflow-y: auto;\"\n         [myDropTarget]\n        (myDrop)=\"deSelectRecord($event)\"\n    >\n      <div \n        *ngFor=\"#rec of data\" \n                (click)=\"selectRow(rec)\"\n        [ngClass]=\"rec.disable?\n        'list-group-item list-group-item-'+rec.type+' disabled':\n        'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec,selectedRecord)?'selected':'') \"\n        [innerHTML]=\"rec.body\" \n        [myDraggable]=\"{data: rec }\"\n       \n         ></div>\n\t  </div>\n    </div>\n</div>\n\t\t\t   <div class=\"col-xs-6\">\n<div class=\"panel panel-default\">\n         <div class=\"list-group\" style=\"height: 300px;overflow-y: auto;\"\n         [myDropTarget]\n        (myDrop)=\"selectRecord($event)\"\n    >\n      <div \n        *ngFor=\"#rec of selectedData\" \n                (click)=\"selectRow(rec)\"\n        [ngClass]=\"rec.disable?\n        'list-group-item list-group-item-'+rec.type+' disabled':\n        'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec,selectedRecord)?'selected':'') \"\n        [innerHTML]=\"rec.body\" \n        [myDraggable]=\"{data: rec }\"\n       \n         ></div>\n      </div>\n\t\t\t   </div>\n          </div>\n</div>\n\n    ",
+                        template: "\n <div class=\"row\">\n\t  <div class=\"col-xs-6\">\n\n<div class=\"panel panel-default\">\n    <div class=\"list-group\" style=\"height: 300px;overflow-y: auto;\"\n         [myDropTarget]\n        (myDrop)=\"deSelectRecord($event)\"\n    >\n      <div \n        *ngFor=\"#rec of data\" \n                (dblclick)=\"selectRecord(rec)\"\n        [ngClass]=\"rec.disable?\n        'list-group-item list-group-item-'+rec.type+' disabled':\n        'list-group-item list-group-item-'+rec.type +' ' \"\n        [innerHTML]=\"rec.body\" \n        [myDraggable]=\"{data: rec }\"\n       \n         ></div>\n\t  </div>\n    </div>\n</div>\n\t\t\t   <div class=\"col-xs-6\">\n<div class=\"panel panel-default\">\n         <div class=\"list-group\" style=\"height: 300px;overflow-y: auto;\"\n         [myDropTarget]\n        (myDrop)=\"selectRecord($event)\"\n    >\n      <div \n        *ngFor=\"#rec of selectedData\" \n        (dblclick)=\"deSelectRecord(rec)\"\n        [ngClass]=\"rec.disable?\n        'list-group-item list-group-item-'+rec.type+' disabled':\n        'list-group-item list-group-item-'+rec.type +' ' \"\n        [innerHTML]=\"rec.body\" \n        [myDraggable]=\"{data: rec }\"\n       \n         ></div>\n      </div>\n\t\t\t   </div>\n          </div>\n</div>\n\n    ",
                         directives: [DropTargetDirective, DraggableDirective]
                     }), 
                     __metadata('design:paramtypes', [])

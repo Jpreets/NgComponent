@@ -80,7 +80,7 @@ export class BandComponent {
         },
         {
             img:'images/form.png',
-            label:'ItemSelectorComponent',
+            label:'Item Selector',
             link:'/ItemSelectorComponent'
         }
        
