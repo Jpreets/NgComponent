@@ -19,7 +19,8 @@
         </div>
        
       </div>
-     
+      <ng-radiobuttons [name]="name" [value]="value" [data]="data"></ng-radiobuttons>
+      <ng-checkbox [name]="name" [value]="value_check" [data]="data"></ng-checkbox>
       <button type="submit" class="btn btn-primary" [disabled]="!contactForm.form.valid">Submit</button>
       <button type="button" class="btn btn-primary" (click)="newContact()">New Contact</button>
 </form>

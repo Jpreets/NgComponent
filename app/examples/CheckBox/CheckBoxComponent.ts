@@ -3,7 +3,12 @@ import {CORE_DIRECTIVES} from 'angular2/common'
 import {NgCheckBox} from "app/components/CheckBox/NgCheckBox"
 
 @Component({
-    template: '<ng-checkbox [name]="name" [value]="value" [data]="data"></ng-checkbox>',
+    template: `<div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="lead"> CheckBox </span><br>
+           </div>
+            <ng-checkbox [name]="name" [value]="value" [data]="data"></ng-checkbox>
+            </div>`,
     directives: [CORE_DIRECTIVES,NgCheckBox]
 })
 

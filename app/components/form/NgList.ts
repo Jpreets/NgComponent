@@ -7,7 +7,7 @@ import {Component,Input,Output,EventEmitter} from "angular2/core"
     <div class="list-group">
       <div 
         *ngFor="#rec of data" 
-                (click)="selectRow(rec)"
+                (click)="selectRow(rec,$event)"
         [ngClass]="rec.disable?
         'list-group-item list-group-item-'+rec.type+' disabled':
         'list-group-item list-group-item-'+rec.type +' '+(checkRecord(rec)?'selected':'') "
@@ -21,7 +21,8 @@ export class NgList{
     @Input() data=[];
     @Input() multiselect;
     @Input() selectable=false;
-    public selectedRecord=[] ;
+    public selectedRecord=[];
+    mouseEvent: MouseEvent;
 
     @Output() onSelectionChange = new EventEmitter();
         
@@ -34,7 +35,8 @@ export class NgList{
             return false;
         }
 
-     selectRow(record) {
+     selectRow(record,event:MouseEvent) {
+        this.mouseEvent = event;
         if(!this.selectable) return;
         if(!this.multiselect){
             for(var i=0;i<this.selectedRecord.length;i++){
@@ -51,7 +53,7 @@ export class NgList{
                     flag = 1;
                 }
             }
-            if(flag == 0)
+            if(flag == 0 && this.mouseEvent.type=="click" && event.ctrlKey)
                 this.selectedRecord.push(record);
         }
         this.onSelectionChange.emit(this.selectedRecord);

@@ -61,7 +61,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgCheckBox = __decorate([
                     core_1.Component({
                         selector: 'ng-checkbox',
-                        template: "\n        <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <span class=\"lead\"> CheckBox </span><br>\n           </div>\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"checkValue(key) ?'fa fa-check-square-o' : 'fa fa-square-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\">{{key.value}}</i>\n               <br><br>\n            </div>\n         </div>\n    ",
+                        template: "\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"checkValue(key) ?'fa fa-check-square-o' : 'fa fa-square-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\"></i>{{key.value}}\n               <br><br>\n           </div>\n    ",
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgCheckBox);

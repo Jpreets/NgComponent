@@ -44,7 +44,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgRadioButtons = __decorate([
                     core_1.Component({
                         selector: 'ng-radiobuttons',
-                        template: "\n        <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <span class=\"lead\"> Radio Buttons </span><br>\n           </div>\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"key.id==value ?'fa fa-check-circle-o' : 'fa fa-circle-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\">{{key.value}}</i>\n               <br><br>\n            </div>\n         </div>\n    ",
+                        template: "\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"key.id==value ?'fa fa-check-circle-o' : 'fa fa-circle-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\"></i>{{key.value}}\n               <br><br>\n             </div>\n    ",
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgRadioButtons);

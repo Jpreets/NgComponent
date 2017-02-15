@@ -35,7 +35,7 @@ System.register(["angular2/core", 'angular2/common', "app/components/RadioButton
                 }
                 RadioButtonsComponent = __decorate([
                     core_1.Component({
-                        template: '<ng-radiobuttons [name]="name" [value]="value" [data]="data"></ng-radiobuttons>',
+                        template: "\n        <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <span class=\"lead\"> Radio Buttons </span><br>\n           </div>\n        <ng-radiobuttons [name]=\"name\" [value]=\"value\" [data]=\"data\"></ng-radiobuttons>\n        </div>",
                         directives: [common_1.CORE_DIRECTIVES, NgRadioButtons_1.NgRadioButtons]
                     }), 
                     __metadata('design:paramtypes', [])
