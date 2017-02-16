@@ -80,7 +80,7 @@ export class DropTargetDirective {
     selector:'ng-itemselector',
     template:`
  <div class="row">
-	  <div class="col-xs-6">
+	  <div class="col-xs-5">
 
 <div class="panel panel-default">
     <div class="list-group" style="height: 300px;overflow-y: auto;"
@@ -100,7 +100,14 @@ export class DropTargetDirective {
 	  </div>
     </div>
 </div>
-			   <div class="col-xs-6">
+ <div class="col-xs-2" style="width:45px; font-size:x-large; margin-top:90px">
+ <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+  <i class="fa fa-angle-right" aria-hidden="true"></i>
+  <i class="fa fa-angle-left" aria-hidden="true"></i>
+   <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+
+ </div>
+ <div class="col-xs-5">
 <div class="panel panel-default">
          <div class="list-group" style="height: 300px;overflow-y: auto;"
          [myDropTarget]
