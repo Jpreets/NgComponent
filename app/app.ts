@@ -20,6 +20,7 @@ import {ItemSelectorComponent} from  "app/examples/Form/ItemSelectorComponent";
 import {CheckBoxComponent} from  "app/examples/CheckBox/CheckBoxComponent";
 import {RadioButtonsComponent} from  "app/examples/RadioButtons/RadioButtonsComponent";
 import {CkEditorComponent} from  "app/examples/CkEditor/CkEditorComponent";
+import {FileUploadComponent} from  "app/examples/FileUpload/FileUploadComponent";
 
 
 // Root Component
@@ -42,6 +43,7 @@ import {CkEditorComponent} from  "app/examples/CkEditor/CkEditorComponent";
     {path: '/RadioButtonsComponent', component: RadioButtonsComponent, as: 'RadioButtonsComponent'  },
     {path: '/ItemSelectorComponent', component: ItemSelectorComponent, as: 'ItemSelectorComponent'  },
     {path: '/CkEditorComponent', component: CkEditorComponent, as: 'CkEditorComponent'  },
+    {path: '/FileUploadComponent', component: FileUploadComponent, as: 'FileUploadComponent'  },
 
 ])
 

@@ -1,0 +1,113 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'install', 'angular2/http' ]
+2 info using npm@2.15.11
+3 info using node@v4.7.3
+4 verbose install initial load of /home/anshul/netbeans-8.1/2016_projects/NgComponent/package.json
+5 warn package.json NgComponent@1.0.0 No description
+6 warn package.json NgComponent@1.0.0 No repository field.
+7 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/angular2/package.json
+8 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/concurrently/package.json
+9 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/es6-promise/package.json
+10 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/es6-shim/package.json
+11 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/fsevents/package.json
+12 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/lite-server/package.json
+13 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/nan/package.json
+14 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/reflect-metadata/package.json
+15 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/rxjs/package.json
+16 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/systemjs/package.json
+17 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/typescript/package.json
+18 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/typings/package.json
+19 verbose installManyTop reading scoped package data from /home/anshul/netbeans-8.1/2016_projects/NgComponent/node_modules/zone.js/package.json
+20 verbose readDependencies loading dependencies from /home/anshul/netbeans-8.1/2016_projects/NgComponent/package.json
+21 silly cache add args [ 'angular2/http', null ]
+22 verbose cache add spec angular2/http
+23 silly cache add parsed spec Result {
+23 silly cache add   raw: 'angular2/http',
+23 silly cache add   scope: null,
+23 silly cache add   name: null,
+23 silly cache add   rawSpec: 'angular2/http',
+23 silly cache add   spec: 'github:angular2/http',
+23 silly cache add   type: 'hosted',
+23 silly cache add   hosted:
+23 silly cache add    { type: 'github',
+23 silly cache add      ssh: 'git@github.com:angular2/http.git',
+23 silly cache add      sshUrl: 'git+ssh://git@github.com/angular2/http.git',
+23 silly cache add      httpsUrl: 'git+https://github.com/angular2/http.git',
+23 silly cache add      gitUrl: 'git://github.com/angular2/http.git',
+23 silly cache add      shortcut: 'github:angular2/http',
+23 silly cache add      directUrl: 'https://raw.githubusercontent.com/angular2/http/master/package.json' } }
+24 verbose addRemoteGit caching angular2/http
+25 verbose addRemoteGit angular2/http is a repository hosted by github
+26 silly tryGitProto attempting to clone git://github.com/angular2/http.git
+27 silly tryClone cloning angular2/http via git://github.com/angular2/http.git
+28 verbose tryClone git-github-com-angular2-http-git-5ad395d5 not in flight; caching
+29 verbose correctMkdir /home/anshul/.npm/_git-remotes correctMkdir not in flight; initializing
+30 verbose makeDirectory /home/anshul/.npm/_git-remotes creation not in flight; initializing
+31 silly makeDirectory /home/anshul/.npm/_git-remotes uid: 1000 gid: 1000
+32 info git [ 'clone',
+32 info git   '--template=/home/anshul/.npm/_git-remotes/_templates',
+32 info git   '--mirror',
+32 info git   'git://github.com/angular2/http.git',
+32 info git   '/home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-5ad395d5' ]
+33 verbose git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git://github.com/angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-5ad395d5: Cloning into bare repository '/home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-5ad395d5'...
+33 verbose git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git://github.com/angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-5ad395d5: fatal: remote error:
+33 verbose git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git://github.com/angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-5ad395d5:   Repository not found.
+34 silly tryHTTPS attempting to clone git+https://github.com/angular2/http.git
+35 silly tryClone cloning angular2/http via git+https://github.com/angular2/http.git
+36 verbose tryClone https-github-com-angular2-http-git-628d78fd not in flight; caching
+37 verbose correctMkdir /home/anshul/.npm/_git-remotes correctMkdir not in flight; initializing
+38 info git [ 'clone',
+38 info git   '--template=/home/anshul/.npm/_git-remotes/_templates',
+38 info git   '--mirror',
+38 info git   'https://github.com/angular2/http.git',
+38 info git   '/home/anshul/.npm/_git-remotes/https-github-com-angular2-http-git-628d78fd' ]
+39 verbose git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror https://github.com/angular2/http.git /home/anshul/.npm/_git-remotes/https-github-com-angular2-http-git-628d78fd: Cloning into bare repository '/home/anshul/.npm/_git-remotes/https-github-com-angular2-http-git-628d78fd'...
+39 verbose git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror https://github.com/angular2/http.git /home/anshul/.npm/_git-remotes/https-github-com-angular2-http-git-628d78fd: remote: Invalid username or password.
+39 verbose git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror https://github.com/angular2/http.git /home/anshul/.npm/_git-remotes/https-github-com-angular2-http-git-628d78fd: fatal: Authentication failed for 'https://github.com/angular2/http.git/'
+40 silly trySSH attempting to clone git@github.com:angular2/http.git
+41 silly tryClone cloning angular2/http via git@github.com:angular2/http.git
+42 verbose tryClone git-github-com-angular2-http-git-4c2c036f not in flight; caching
+43 verbose correctMkdir /home/anshul/.npm/_git-remotes correctMkdir not in flight; initializing
+44 info git [ 'clone',
+44 info git   '--template=/home/anshul/.npm/_git-remotes/_templates',
+44 info git   '--mirror',
+44 info git   'git@github.com:angular2/http.git',
+44 info git   '/home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f' ]
+45 error git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f: Cloning into bare repository '/home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f'...
+45 error git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f: Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+45 error git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f: Permission denied (publickey).
+45 error git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f: fatal: Could not read from remote repository.
+45 error git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f:
+45 error git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f: Please make sure you have the correct access rights
+45 error git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f: and the repository exists.
+46 verbose stack Error: Command failed: git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f
+46 verbose stack Cloning into bare repository '/home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f'...
+46 verbose stack Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+46 verbose stack Permission denied (publickey).
+46 verbose stack fatal: Could not read from remote repository.
+46 verbose stack
+46 verbose stack Please make sure you have the correct access rights
+46 verbose stack and the repository exists.
+46 verbose stack
+46 verbose stack     at ChildProcess.exithandler (child_process.js:213:12)
+46 verbose stack     at emitTwo (events.js:87:13)
+46 verbose stack     at ChildProcess.emit (events.js:172:7)
+46 verbose stack     at maybeClose (internal/child_process.js:854:16)
+46 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:222:5)
+47 verbose cwd /home/anshul/netbeans-8.1/2016_projects/NgComponent
+48 error Linux 3.13.0-109-generic
+49 error argv "/usr/bin/nodejs" "/usr/bin/npm" "install" "angular2/http"
+50 error node v4.7.3
+51 error npm  v2.15.11
+52 error code 128
+53 error Command failed: git clone --template=/home/anshul/.npm/_git-remotes/_templates --mirror git@github.com:angular2/http.git /home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f
+53 error Cloning into bare repository '/home/anshul/.npm/_git-remotes/git-github-com-angular2-http-git-4c2c036f'...
+53 error Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+53 error Permission denied (publickey).
+53 error fatal: Could not read from remote repository.
+53 error
+53 error Please make sure you have the correct access rights
+53 error and the repository exists.
+54 error If you need help, you may report this error at:
+54 error     <https://github.com/npm/npm/issues>
+55 verbose exit [ 1, true ]

@@ -87,6 +87,11 @@ export class BandComponent {
             img:'images/form.png',
             label:'Editor',
             link:'/CkEditorComponent'
+        },
+        {
+            img:'images/form.png',
+            label:'File Upload',
+            link:'/FileUploadComponent'
         }
        
     ];
