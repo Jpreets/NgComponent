@@ -29,7 +29,7 @@ System.register(["angular2/core", 'angular2/common', "app/components/CkEditor/Ng
                 }
                 CkEditorComponent = __decorate([
                     core_1.Component({
-                        template: "<div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <span class=\"lead\"> CkEditor </span><br>\n           </div>\n            <ng-ckeditor></ng-ckeditor>\n            </div>",
+                        template: "\n            <h1>Ck Editor</h1>\n            <hr/>\n            <ng-ckeditor></ng-ckeditor>\n            ",
                         directives: [common_1.CORE_DIRECTIVES, NgCkEditor_1.NgCkEditor]
                     }), 
                     __metadata('design:paramtypes', [])

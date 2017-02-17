@@ -29,7 +29,7 @@ System.register(["angular2/core", 'angular2/common', "app/components/FileUpload/
                 }
                 FileUploadComponent = __decorate([
                     core_1.Component({
-                        template: "\n            <form>\n                <ng-fileupload [activeColor]=\"'orangered'\" [baseColor]=\"'lightgray'\"></ng-fileupload>\n            </form>\n            ",
+                        template: "\n            <h1>File Upload</h1>\n            <hr/>\n            <form>\n                <ng-fileupload [activeColor]=\"'orangered'\" [baseColor]=\"'lightgray'\"></ng-fileupload>\n            </form>\n            ",
                         directives: [common_1.CORE_DIRECTIVES, NgFileUpload_1.NgFileUpload]
                     }), 
                     __metadata('design:paramtypes', [])
