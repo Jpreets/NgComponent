@@ -4,12 +4,11 @@ import {CORE_DIRECTIVES} from 'angular2/common'
 import {NgCkEditor} from "app/components/CkEditor/NgCkEditor"
 
 @Component({
-    template: `<div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="lead"> CkEditor </span><br>
-           </div>
+    template: `
+            <h1>Ck Editor</h1>
+            <hr/>
             <ng-ckeditor></ng-ckeditor>
-            </div>`,
+            `,
     directives: [CORE_DIRECTIVES,NgCkEditor]
 })
 

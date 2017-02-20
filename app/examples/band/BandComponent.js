@@ -89,6 +89,11 @@ System.register(['angular2/core', 'angular2/common', "app/components/band/NgBand
                             img: 'images/form.png',
                             label: 'Editor',
                             link: '/CkEditorComponent'
+                        },
+                        {
+                            img: 'images/form.png',
+                            label: 'File Upload',
+                            link: '/FileUploadComponent'
                         }
                     ];
                 }
