@@ -1,5 +1,5 @@
 {
-  "name": "NgComponent",
+  "name": "EmailChimp_v2",
   "version": "1.0.0",
   "scripts": {
     "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
@@ -21,8 +21,9 @@
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "http-proxy-middleware": "^0.17.3",
     "lite-server": "^2.1.0",
     "typescript": "^1.7.5",
-    "typings":"^0.6.8"
+    "typings": "^0.6.8"
   }
 }

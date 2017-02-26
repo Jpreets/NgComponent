@@ -1,4 +1,4 @@
-System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router', "app/examples/band/BandComponent", "app/examples/tab/TabComponent", "app/examples/grid/GridComponent", "app/examples/popup/PopupComponent", "app/examples/Form/FormComponent", "app/examples/Tree/TreeComponent", "app/examples/band/PanelComponent", "app/examples/Form/ListComponent", "app/examples/Form/ItemSelectorComponent", "app/examples/CheckBox/CheckBoxComponent", "app/examples/RadioButtons/RadioButtonsComponent", "app/examples/CkEditor/CkEditorComponent", "app/examples/FileUpload/FileUploadComponent"], function(exports_1, context_1) {
+System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router', "app/components/popup/NgPopup", "angular2/http", 'rxjs/add/operator/map', "app/examples/band/BandComponent", "app/examples/EmailServerConfig/EmailConfigComponent", "app/examples/grid/GridComponent", "app/examples/popup/PopupComponent", "app/examples/Form/FormComponent", "app/examples/Tree/TreeComponent", "app/examples/band/PanelComponent", "app/examples/Form/ListComponent", "app/examples/Form/ItemSelectorComponent", "app/examples/CheckBox/CheckBoxComponent", "app/examples/RadioButtons/RadioButtonsComponent", "app/examples/CkEditor/CkEditorComponent", "app/examples/FileUpload/FileUploadComponent"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var browser_1, core_1, router_1, BandComponent_1, TabComponent_1, GridComponent_1, PopupComponent_1, FormComponent_1, TreeComponent_1, PanelComponent_1, ListComponent_1, ItemSelectorComponent_1, CheckBoxComponent_1, RadioButtonsComponent_1, CkEditorComponent_1, FileUploadComponent_1;
+    var browser_1, core_1, router_1, NgPopup_1, http_1, BandComponent_1, EmailConfigComponent_1, GridComponent_1, PopupComponent_1, FormComponent_1, TreeComponent_1, PanelComponent_1, ListComponent_1, ItemSelectorComponent_1, CheckBoxComponent_1, RadioButtonsComponent_1, CkEditorComponent_1, FileUploadComponent_1;
     var RootComponent;
     return {
         setters:[
@@ -23,11 +23,18 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (NgPopup_1_1) {
+                NgPopup_1 = NgPopup_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (_1) {},
             function (BandComponent_1_1) {
                 BandComponent_1 = BandComponent_1_1;
             },
-            function (TabComponent_1_1) {
-                TabComponent_1 = TabComponent_1_1;
+            function (EmailConfigComponent_1_1) {
+                EmailConfigComponent_1 = EmailConfigComponent_1_1;
             },
             function (GridComponent_1_1) {
                 GridComponent_1 = GridComponent_1_1;
@@ -65,18 +72,45 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
         execute: function() {
             // Root Component
             RootComponent = (function () {
-                function RootComponent() {
+                function RootComponent(http) {
+                    this.http = http;
+                    this.title = 'My Popup';
+                    this.dialogActive = { bool: false };
                 }
+                RootComponent.prototype.login = function () {
+                    var data = new http_1.URLSearchParams();
+                    data.append('email', this.email);
+                    data.append('password', this.password);
+                    data.append('rememberMe', 'on');
+                    var headers = new http_1.Headers();
+                    headers.append("Content-Type", "application/x-www-form-urlencoded");
+                    this.http
+                        .post('http://localhost:8084/EmailChimp/checkLogin', data, {
+                        headers: headers
+                    })
+                        .subscribe(function (data) {
+                        alert('ok');
+                    }, function (error) {
+                        console.log(error.json());
+                    });
+                };
+                RootComponent.prototype.showPopup = function () {
+                    this.dialogActive.bool = true;
+                };
+                RootComponent.prototype.closePopup = function () {
+                    this.dialogActive.bool = false;
+                };
                 RootComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         templateUrl: 'app/htmls/main.html',
-                        directives: [router_1.ROUTER_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, NgPopup_1.NgPopup],
+                        providers: [http_1.HTTP_PROVIDERS]
                     }),
                     router_1.RouteConfig([
                         { path: '/', component: BandComponent_1.BandComponent, as: 'Home' },
                         { path: '/BandComponent', component: BandComponent_1.BandComponent, as: 'BandComponent' },
-                        { path: '/TabComponent', component: TabComponent_1.TabComponent, as: 'TabComponent' },
+                        { path: '/EmailConfigComponent', component: EmailConfigComponent_1.EmailConfigComponent, as: 'EmailConfigComponent' },
                         { path: '/PopupComponent', component: PopupComponent_1.PopupComponent, as: 'PopupComponent' },
                         { path: '/GridComponent', component: GridComponent_1.GridComponent, as: 'GridComponent' },
                         { path: '/FormComponent', component: FormComponent_1.FormComponent, as: 'FormComponent' },
@@ -89,7 +123,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                         { path: '/CkEditorComponent', component: CkEditorComponent_1.CkEditorComponent, as: 'CkEditorComponent' },
                         { path: '/FileUploadComponent', component: FileUploadComponent_1.FileUploadComponent, as: 'FileUploadComponent' },
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [http_1.Http])
                 ], RootComponent);
                 return RootComponent;
             }());

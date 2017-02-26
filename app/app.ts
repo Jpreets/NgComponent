@@ -3,13 +3,14 @@ import {bootstrap} from 'angular2/platform/browser';
 import { Component, ContentChildren,
    QueryList, AfterContentInit, Input ,Output,EventEmitter,
   View,DynamicComponentLoader,ElementRef,Inject,OnInit,provide} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
-
+import {CORE_DIRECTIVES,NgForm} from 'angular2/common';
 import {ROUTER_PROVIDERS,ROUTER_DIRECTIVES, LocationStrategy, HashLocationStrategy,RouteConfig} from 'angular2/router';
-
+import {NgPopup} from "app/components/popup/NgPopup" ;
+import { URLSearchParams,HttpModule ,HTTP_PROVIDERS ,Http, Response,Headers, RequestOptions  } from "angular2/http"
+import 'rxjs/add/operator/map';
 
 import {BandComponent} from  "app/examples/band/BandComponent";
-import {TabComponent} from   "app/examples/tab/TabComponent";
+import {EmailConfigComponent} from   "app/examples/EmailServerConfig/EmailConfigComponent";
 import {GridComponent} from  "app/examples/grid/GridComponent";
 import {PopupComponent} from "app/examples/popup/PopupComponent";
 import {FormComponent} from "app/examples/Form/FormComponent";
@@ -27,12 +28,13 @@ import {FileUploadComponent} from  "app/examples/FileUpload/FileUploadComponent"
 @Component({
     selector: 'my-app',
     templateUrl:'app/htmls/main.html',
-    directives: [ ROUTER_DIRECTIVES]
+    directives: [ ROUTER_DIRECTIVES,NgPopup],
+    providers: [HTTP_PROVIDERS]
 })
 @RouteConfig([
     {path: '/',        component: BandComponent, as: 'Home'},
     {path: '/BandComponent',        component: BandComponent, as: 'BandComponent'},
-    {path: '/TabComponent', component: TabComponent, as: 'TabComponent'  },
+    {path: '/EmailConfigComponent', component: EmailConfigComponent, as: 'EmailConfigComponent'  },
     {path: '/PopupComponent', component: PopupComponent, as: 'PopupComponent'  },
     {path: '/GridComponent', component: GridComponent, as: 'GridComponent'  },
     {path: '/FormComponent', component: FormComponent, as: 'FormComponent'  },
@@ -48,6 +50,43 @@ import {FileUploadComponent} from  "app/examples/FileUpload/FileUploadComponent"
 ])
 
 class RootComponent{
+
+    public title = 'My Popup'
+
+    public dialogActive ={bool : false};
+    
+    public  email: string;
+    public  password: string;
+
+    constructor (
+        private http: Http
+    ) {}
+
+    login(){
+        let data = new URLSearchParams();
+        data.append('email', this.email);
+        data.append('password', this.password);
+        data.append('rememberMe','on');
+        var headers = new Headers();
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        this.http
+          .post('http://localhost:8084/EmailChimp/checkLogin', data, {
+      headers: headers
+    })
+            .subscribe(data => {
+                  alert('ok');
+            }, error => {
+                console.log(error.json());
+            });
+    }
+    
+    showPopup(){
+       this.dialogActive.bool =true;
+     }
+
+     closePopup(){
+       this.dialogActive.bool =false;
+     }
 }
 
 
