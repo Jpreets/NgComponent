@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/services/EmailServerConfigService", "app/components/EmailSettingsGrid/NgEmailSettingsGrid", 'rxjs/Rx'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/services/EmailServerConfigService", "app/components/grid/NgGrid", "app/components/popup/NgPopup", 'rxjs/Rx'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, http_1, EmailServerConfigService_1, NgEmailSettingsGrid_1;
+    var core_1, common_1, http_1, EmailServerConfigService_1, NgGrid_1, NgPopup_1;
     var EmailConfigComponent;
     return {
         setters:[
@@ -26,16 +26,24 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
             function (EmailServerConfigService_1_1) {
                 EmailServerConfigService_1 = EmailServerConfigService_1_1;
             },
-            function (NgEmailSettingsGrid_1_1) {
-                NgEmailSettingsGrid_1 = NgEmailSettingsGrid_1_1;
+            function (NgGrid_1_1) {
+                NgGrid_1 = NgGrid_1_1;
+            },
+            function (NgPopup_1_1) {
+                NgPopup_1 = NgPopup_1_1;
             },
             function (_1) {}],
         execute: function() {
             EmailConfigComponent = (function () {
-                function EmailConfigComponent(_emailConfig) {
+                function EmailConfigComponent(_emailConfig, http) {
                     this._emailConfig = _emailConfig;
-                    this.title = 'Email Configurations';
+                    this.http = http;
                     this.selectedRecord = {};
+                    this.showError = false;
+                    this.edit = false;
+                    this.dialogActive = { bool: false };
+                    this.dialogAddEditActive = { bool: false };
+                    this.title = 'Email Configurations';
                     this.columns = [
                         { id: 'id', value: '#' },
                         { id: 'smtpHost', value: 'Host' },
@@ -44,10 +52,35 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                         { id: 'smtpPassword', value: 'Password' }
                     ];
                 }
+                EmailConfigComponent.prototype.showAddPopup = function () {
+                    this.selectedRecord = {};
+                    this.edit = false;
+                    this.dialogAddEditActive.bool = true;
+                };
+                EmailConfigComponent.prototype.closeAddPopup = function () {
+                    this.selectedRecord = {};
+                    this.dialogAddEditActive.bool = false;
+                };
+                EmailConfigComponent.prototype.showEditPopup = function () {
+                    this.edit = true;
+                    this.dialogAddEditActive.bool = true;
+                };
+                EmailConfigComponent.prototype.closeEditPopup = function () {
+                    this.dialogAddEditActive.bool = false;
+                };
+                EmailConfigComponent.prototype.showPopup = function () {
+                    this.dialogActive.bool = true;
+                };
+                EmailConfigComponent.prototype.closePopup = function () {
+                    this.dialogActive.bool = false;
+                };
                 EmailConfigComponent.prototype.getContacts = function () {
                     var _this = this;
                     this._emailConfig.getContacts().subscribe(function (data) {
                         _this.data = data;
+                    }, function (err) {
+                        _this.showError = true;
+                        _this.showPopup();
                     });
                 };
                 EmailConfigComponent.prototype.ngOnInit = function () {
@@ -57,13 +90,54 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                     this.selectedRecord = event;
                     console.log(this.selectedRecord);
                 };
+                EmailConfigComponent.prototype.editEmailConfig = function (record) {
+                    console.log(record);
+                    var data = new http_1.URLSearchParams();
+                    data.append('id', record.id);
+                    data.append('smtpHost', record.smtpHost);
+                    data.append('smtpPort', record.smtpPort);
+                    data.append('smtpUsername', record.smtpUsername);
+                    data.append('smtpPassword', record.smtpPassword);
+                    data.append('email', "anshulgupta231193@gmail.com");
+                    var headers = new http_1.Headers();
+                    headers.append("Content-Type", "application/x-www-form-urlencoded");
+                    this.http
+                        .post('http://localhost:8084/EmailChimp/update-email-configuration', data, {
+                        headers: headers
+                    })
+                        .subscribe(function (data) {
+                        window.location.reload();
+                    }, function (error) {
+                        console.log(error.json());
+                    });
+                };
+                EmailConfigComponent.prototype.addEmailConfig = function () {
+                    console.log(this.selectedRecord);
+                    var data = new http_1.URLSearchParams();
+                    data.append('smtpHost', this.selectedRecord.smtpHost);
+                    data.append('smtpPort', this.selectedRecord.smtpPort);
+                    data.append('smtpUsername', this.selectedRecord.smtpUsername);
+                    data.append('smtpPassword', this.selectedRecord.smtpPassword);
+                    data.append('email', "anshulgupta231193@gmail.com");
+                    var headers = new http_1.Headers();
+                    headers.append("Content-Type", "application/x-www-form-urlencoded");
+                    this.http
+                        .post('http://localhost:8084/EmailChimp/add-email-configuration', data, {
+                        headers: headers
+                    })
+                        .subscribe(function (data) {
+                        window.location.reload();
+                    }, function (error) {
+                        console.log(error.json());
+                    });
+                };
                 EmailConfigComponent = __decorate([
                     core_1.Component({
-                        template: "\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n            >\n            </ng-grid>\n    ",
-                        directives: [common_1.CORE_DIRECTIVES, NgEmailSettingsGrid_1.NgEmailSettingsGrid],
+                        template: "\n    <button type=\"button\" (click)=\"showAddPopup()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>\n                Add</button>\n    <button *ngIf=\"!selectedRecord.id\" type=\"button\" class=\"btn btn-info disabled\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button *ngIf=\"selectedRecord.id\" (click)=\"showEditPopup()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button *ngIf=\"!selectedRecord.id\" type=\"button\" class=\"btn btn-info disabled\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                Delete</button>\n    <button *ngIf=\"selectedRecord.id\" (click)=\"delete()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Delete</button>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n                [dialogActive]=\"dialogAddEditActive\"\n                [selectedRecord]=\"selectedRecord\"\n            >\n            </ng-grid>\n            <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n             [hidden]=\"!showError\"\n            >\n             <h3>Server Down</h3>\n          </ng-popup>\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogAddEditActive\" \n          >\n                    <form (ngSubmit)=\"edit ? editEmailConfig(selectedRecord) : addEmailConfig()\">\n                        <div class=\"form-group\">\n                          <label for=\"host\">SMTP HOST</label>\n                          <input type=\"text\" class=\"form-control\"  required\n                            [(ngModel)]=\"selectedRecord.smtpHost\"   ngControl=\"hostctrl\" #hostctrl=\"ngForm\"\n                              >\n                          <div [hidden]=\"hostctrl.valid || hostctrl.pristine\" class=\"alert alert-danger\">\n                            Host is required\n                          </div>\n                        </div>\n                        \n                        <div class=\"form-group\">\n                          <label for=\"port\">SMTP PORT</label>\n                          <input type=\"text\" class=\"form-control\"  required\n                            [(ngModel)]=\"selectedRecord.smtpPort\"   ngControl=\"portctrl\" #portctrl=\"ngForm\"\n                              >\n                          <div [hidden]=\"portctrl.valid || portctrl.pristine\" class=\"alert alert-danger\">\n                            Port is required\n                          </div>\n                        </div>\n\n                        <div class=\"form-group\">\n                          <label for=\"username\">USERNAME</label>\n                          <input type=\"text\" class=\"form-control\"  required\n                            [(ngModel)]=\"selectedRecord.smtpUsername\"   ngControl=\"userctrl\" #userctrl=\"ngForm\"\n                              >\n                          <div [hidden]=\"userctrl.valid || userctrl.pristine\" class=\"alert alert-danger\">\n                            Username is required\n                          </div>\n                        </div>\n\n                        <div class=\"form-group\">\n                          <label for=\"password\">PASSWORD</label>\n                          <input type=\"password\" class=\"form-control\"  required\n                            [(ngModel)]=\"selectedRecord.smtpPassword\"   ngControl=\"pswdctrl\" #pswdctrl=\"ngForm\"\n                              >\n                          <div [hidden]=\"pswdctrl.valid || pswdctrl.pristine\" class=\"alert alert-danger\">\n                            Password is required\n                          </div>\n                        </div>\n                        \n                        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n                    </form>\n          </ng-popup>\n    ",
+                        directives: [common_1.CORE_DIRECTIVES, NgGrid_1.NgGrid, NgPopup_1.NgPopup],
                         providers: [EmailServerConfigService_1.EmailServerConfigService, http_1.HTTP_PROVIDERS]
                     }), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof EmailServerConfigService_1.EmailServerConfigService !== 'undefined' && EmailServerConfigService_1.EmailServerConfigService) === 'function' && _a) || Object])
+                    __metadata('design:paramtypes', [(typeof (_a = typeof EmailServerConfigService_1.EmailServerConfigService !== 'undefined' && EmailServerConfigService_1.EmailServerConfigService) === 'function' && _a) || Object, http_1.Http])
                 ], EmailConfigComponent);
                 return EmailConfigComponent;
                 var _a;

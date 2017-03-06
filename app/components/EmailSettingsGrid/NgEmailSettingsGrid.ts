@@ -155,7 +155,7 @@ export class NgEmailSettingsGrid {
   @Input() public title='';
   @Input() public columns=[];
   @Input() public data=[];
-  public selectedRecord = {};
+  @Output() public selectedRecord;
 
     public host: string;
     public port: string;

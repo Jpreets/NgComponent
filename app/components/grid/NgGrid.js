@@ -46,6 +46,14 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                     __metadata('design:type', Object)
                 ], NgGrid.prototype, "data", void 0);
                 __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], NgGrid.prototype, "dialogActive", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], NgGrid.prototype, "selectedRecord", void 0);
+                __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], NgGrid.prototype, "onSelectionChange", void 0);

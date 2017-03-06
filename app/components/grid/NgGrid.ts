@@ -44,13 +44,15 @@ export class NgGrid {
   @Input() public title='';
   @Input() public columns=[];
   @Input() public data=[];
-  public selectedRecord = {};
+  @Input() public dialogActive;
+  @Input() public selectedRecord = {};
+
 
   @Output() onSelectionChange = new EventEmitter();
-
+   
   selectRow(record) {
     this.selectedRecord= record;
-     this.onSelectionChange.emit(this.selectedRecord);
+    this.onSelectionChange.emit(this.selectedRecord);
 
   }
 
