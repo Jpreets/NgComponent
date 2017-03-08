@@ -7,6 +7,7 @@ import {EmailServerConfigService} from "app/services/EmailServerConfigService";
 import {EmailConfig} from "app/interface/EmailConfig";
 import {NgGrid} from "app/components/grid/NgGrid";
 import {NgPopup} from "app/components/popup/NgPopup" ;
+import {NgForm} from "app/components/form/NgForm";
 import 'rxjs/Rx';
 
 @Component({
@@ -41,6 +42,8 @@ import 'rxjs/Rx';
              [title]="title"
              [dialogActive]="dialogAddEditActive" 
           >
+            <ng-form [model]="properties" [selectedRecord]="selectedRecord"
+                (onSubmitEvent)="edit ? editEmailConfig($event) : addEmailConfig($event)" ></ng-form>
                     <form (ngSubmit)="edit ? editEmailConfig(selectedRecord) : addEmailConfig()">
                         <div class="form-group">
                           <label for="host">SMTP HOST</label>
@@ -86,7 +89,7 @@ import 'rxjs/Rx';
                     </form>
           </ng-popup>
     `,
-    directives:[CORE_DIRECTIVES,NgGrid,NgPopup],
+    directives:[CORE_DIRECTIVES,NgGrid,NgPopup,NgForm],
     providers: [EmailServerConfigService, HTTP_PROVIDERS]
 })
 export class EmailConfigComponent {
@@ -95,6 +98,12 @@ export class EmailConfigComponent {
     public data : EmailConfig[];
     public showError =  false;
     public edit = false;
+    properties = [
+			{type:"text",label:"smtpHost",name="selectedRecord.smtpHost",required: true},
+			{type:"text",label:"smtpPort"name="selectedRecord.smtpPort",required: true},
+                        {type:"text",label:"smtpUsername"name="selectedRecord.smtpUsername",required: true},
+                        {type:"password",label:"smtpPassword"name="selectedRecord.smtpPassword",required: true}
+                 ];
     constructor(private _emailConfig: EmailServerConfigService,
                     private http: Http) {}
     
@@ -156,7 +165,6 @@ export class EmailConfigComponent {
 
   getSelectedRecord(event) {
        this.selectedRecord= event;
-       console.log(this.selectedRecord);
   }
 
     editEmailConfig(record){
@@ -175,30 +183,14 @@ export class EmailConfigComponent {
                 headers: headers
               })
             .subscribe(data => {
-                  window.location.reload();
+                 // window.location.reload();
             }, error => {
                 console.log(error.json());
             });
     }
-    addEmailConfig(){
-        console.log(this.selectedRecord);
-        let data = new URLSearchParams();
-        data.append('smtpHost', this.selectedRecord.smtpHost);
-        data.append('smtpPort', this.selectedRecord.smtpPort);
-        data.append('smtpUsername', this.selectedRecord.smtpUsername);
-        data.append('smtpPassword', this.selectedRecord.smtpPassword);
-        data.append('email', "anshulgupta231193@gmail.com");
-        var headers = new Headers();
-        headers.append("Content-Type", "application/x-www-form-urlencoded");
-        this.http
-          .post('http://localhost:8084/EmailChimp/add-email-configuration', data, {
-                headers: headers
-              })
-            .subscribe(data => {
-                  window.location.reload();
-            }, error => {
-                console.log(error.json());
-            });
+    addEmailConfig(record){
+        console.log(record);
+        
     }
 
 }

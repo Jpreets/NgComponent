@@ -1,19 +1,36 @@
-import {Component,Input,NgSwitch,NgSwitchWhen,NgSwitchDefault,NgModule} from "angular2/core"
+import {Component, Pipe, PipeTransform, Input,NgSwitch,NgSwitchWhen,NgSwitchDefault,NgModule,Output,EventEmitter} from "angular2/core"
 import {SelectComponent} from "app/components/form/SelectComponent"
 import {NgRadioButtons} from "app/components/RadioButtons/NgRadioButtons"
 import {NgCheckBox} from "app/components/CheckBox/NgCheckBox"
+import { NgForm } from 'angular2/forms';
+
+@Pipe({name: 'keys'})
+export class KeysPipe implements PipeTransform {
+  transform(value, arg) : any {
+
+    for (let key in value) {
+        if(key == arg[0].label){
+            return value[key];
+        }
+    }
+
+    return null;
+  }
+} 
 
 @Component({
 	selector: 'ng-form',
 	templateUrl: 'app/components/form/form.html',
-	directives: [SelectComponent,NgRadioButtons,NgCheckBox]
+	directives: [SelectComponent,NgRadioButtons,NgCheckBox],
+        pipes:[KeysPipe]
 })
 
 export class NgForm{ 
 	@Input() model:[];
-	constructor() {
-    console.log(this.model); // here it prints `null`
-	  }
+        @Input() public selectedRecord;
+        @Output() onSubmitEvent = new EventEmitter();
+	constructor() {}
+
         name = "vehicles";
         data = [
             {id:1,value:"Bike"},
@@ -21,7 +38,13 @@ export class NgForm{
         ];
         value=1;
         value_check=[1];
-	  ngOnInit() {
-	    console.log(this.model); // here it prints the actual value
-	  }
+
+        ngOnInit() {
+          console.log(this.selectedRecord);
+        }
+        
+        onSubmit(form: NgForm) {
+            console.log(form.value);
+            this.onSubmitEvent.emit(this.selectedRecord);
+        }
 }

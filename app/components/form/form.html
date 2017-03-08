@@ -1,5 +1,5 @@
 
-<form (ngSubmit)="onSubmit()" #contactForm="ngForm" novalidate>
+<form #genericForm="ngForm" (ngSubmit)="onSubmit(genericForm)" novalidate>
       
       <div class="form-group" *ngFor="#prop of model">
         <div [ngSwitch]=prop.type>
@@ -13,14 +13,12 @@
                 ngControl="lastname" ></textarea>
           </div>
           <div *ngSwitchDefault>
-              <input type={{prop.type}} class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
-              ngControl="lastname" > 
+              <input [ngModel]="selectedRecord | keys: prop" 
+                  type={{prop.type}} class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
+               > 
           </div>
         </div>
        
       </div>
-      <ng-radiobuttons [name]="name" [value]="value" [data]="data"></ng-radiobuttons>
-      <ng-checkbox [name]="name" [value]="value_check" [data]="data"></ng-checkbox>
-      <button type="submit" class="btn btn-primary" [disabled]="!contactForm.form.valid">Submit</button>
-      <button type="button" class="btn btn-primary" (click)="newContact()">New Contact</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -69,7 +69,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/compo
                         headers: headers
                     })
                         .subscribe(function (data) {
-                        window.location.reload();
+                        // window.location.reload();
                     }, function (error) {
                         console.log(error.json());
                     });
@@ -88,7 +88,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/compo
                         headers: headers
                     })
                         .subscribe(function (data) {
-                        window.location.reload();
+                        //   window.location.reload();
                     }, function (error) {
                         console.log(error.json());
                     });

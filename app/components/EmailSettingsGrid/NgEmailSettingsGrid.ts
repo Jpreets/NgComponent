@@ -203,7 +203,7 @@ export class NgEmailSettingsGrid {
                 headers: headers
               })
             .subscribe(data => {
-                  window.location.reload();
+                 // window.location.reload();
             }, error => {
                 console.log(error.json());
             });
@@ -222,7 +222,7 @@ export class NgEmailSettingsGrid {
                 headers: headers
               })
             .subscribe(data => {
-                  window.location.reload();
+               //   window.location.reload();
             }, error => {
                 console.log(error.json());
             });
