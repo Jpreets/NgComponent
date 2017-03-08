@@ -155,7 +155,7 @@ export class NgEmailSettingsGrid {
   @Input() public title='';
   @Input() public columns=[];
   @Input() public data=[];
-  public selectedRecord = {};
+  @Output() public selectedRecord;
 
     public host: string;
     public port: string;
@@ -203,7 +203,7 @@ export class NgEmailSettingsGrid {
                 headers: headers
               })
             .subscribe(data => {
-                  window.location.reload();
+                 // window.location.reload();
             }, error => {
                 console.log(error.json());
             });
@@ -222,7 +222,7 @@ export class NgEmailSettingsGrid {
                 headers: headers
               })
             .subscribe(data => {
-                  window.location.reload();
+               //   window.location.reload();
             }, error => {
                 console.log(error.json());
             });

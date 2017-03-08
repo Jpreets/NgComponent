@@ -11,7 +11,7 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, SelectComponent_1, NgRadioButtons_1, NgCheckBox_1;
-    var NgForm;
+    var KeysPipe, NgForm;
     return {
         setters:[
             function (core_1_1) {
@@ -27,8 +27,27 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                 NgCheckBox_1 = NgCheckBox_1_1;
             }],
         execute: function() {
+            KeysPipe = (function () {
+                function KeysPipe() {
+                }
+                KeysPipe.prototype.transform = function (value, arg) {
+                    for (var key in value) {
+                        if (key == arg[0].label) {
+                            return value[key];
+                        }
+                    }
+                    return null;
+                };
+                KeysPipe = __decorate([
+                    core_1.Pipe({ name: 'keys' }), 
+                    __metadata('design:paramtypes', [])
+                ], KeysPipe);
+                return KeysPipe;
+            }());
+            exports_1("KeysPipe", KeysPipe);
             NgForm = (function () {
                 function NgForm() {
+                    this.onSubmitEvent = new core_1.EventEmitter();
                     this.name = "vehicles";
                     this.data = [
                         { id: 1, value: "Bike" },
@@ -36,20 +55,32 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                     ];
                     this.value = 1;
                     this.value_check = [1];
-                    console.log(this.model); // here it prints `null`
                 }
                 NgForm.prototype.ngOnInit = function () {
-                    console.log(this.model); // here it prints the actual value
+                    console.log(this.selectedRecord);
+                };
+                NgForm.prototype.onSubmit = function (form) {
+                    console.log(form.value);
+                    this.onSubmitEvent.emit(this.selectedRecord);
                 };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Array)
                 ], NgForm.prototype, "model", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], NgForm.prototype, "selectedRecord", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], NgForm.prototype, "onSubmitEvent", void 0);
                 NgForm = __decorate([
                     core_1.Component({
                         selector: 'ng-form',
                         templateUrl: 'app/components/form/form.html',
-                        directives: [SelectComponent_1.SelectComponent, NgRadioButtons_1.NgRadioButtons, NgCheckBox_1.NgCheckBox]
+                        directives: [SelectComponent_1.SelectComponent, NgRadioButtons_1.NgRadioButtons, NgCheckBox_1.NgCheckBox],
+                        pipes: [KeysPipe]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgForm);

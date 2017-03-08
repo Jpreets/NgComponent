@@ -34,7 +34,6 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/compo
                     this.title = '';
                     this.columns = [];
                     this.data = [];
-                    this.selectedRecord = {};
                     this.dialogActive = { bool: false };
                     this.dialogEditActive = { bool: false };
                     this.onSelectionChange = new core_1.EventEmitter();
@@ -70,7 +69,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/compo
                         headers: headers
                     })
                         .subscribe(function (data) {
-                        window.location.reload();
+                        // window.location.reload();
                     }, function (error) {
                         console.log(error.json());
                     });
@@ -89,7 +88,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/compo
                         headers: headers
                     })
                         .subscribe(function (data) {
-                        window.location.reload();
+                        //   window.location.reload();
                     }, function (error) {
                         console.log(error.json());
                     });
@@ -124,6 +123,10 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/compo
                     core_1.Input(), 
                     __metadata('design:type', Object)
                 ], NgEmailSettingsGrid.prototype, "data", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], NgEmailSettingsGrid.prototype, "selectedRecord", void 0);
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)

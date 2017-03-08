@@ -32,8 +32,11 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 export class NgPopup {
 
  @Input() public title='';
- @Input() public dialogActive ={bool : false};
+ @Input() public dialogActive;
 
+    ngOnInit(){
+        console.log(this.dialogActive);
+   }
  closePopup(){
     this.dialogActive.bool =false;
   }
