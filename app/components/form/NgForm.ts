@@ -2,7 +2,6 @@ import {Component, Pipe, PipeTransform, Input,NgSwitch,NgSwitchWhen,NgSwitchDefa
 import {SelectComponent} from "app/components/form/SelectComponent"
 import {NgRadioButtons} from "app/components/RadioButtons/NgRadioButtons"
 import {NgCheckBox} from "app/components/CheckBox/NgCheckBox"
-import { NgForm } from 'angular2/forms';
 
 @Pipe({name: 'keys'})
 export class KeysPipe implements PipeTransform {
@@ -22,14 +21,15 @@ export class KeysPipe implements PipeTransform {
 	selector: 'ng-form',
 	templateUrl: 'app/components/form/form.html',
 	directives: [SelectComponent,NgRadioButtons,NgCheckBox],
-        pipes:[KeysPipe]
+    pipes:[KeysPipe]
 })
 
 export class NgForm{ 
-	@Input() model:[];
+	    @Input() model:[];
         @Input() public selectedRecord;
         @Output() onSubmitEvent = new EventEmitter();
-	constructor() {}
+	    
+        constructor() {}
 
         name = "vehicles";
         data = [
@@ -38,13 +38,8 @@ export class NgForm{
         ];
         value=1;
         value_check=[1];
-
-        ngOnInit() {
-          console.log(this.selectedRecord);
-        }
         
         onSubmit(form: NgForm) {
-            console.log(form.value);
             this.onSubmitEvent.emit(this.selectedRecord);
         }
 }

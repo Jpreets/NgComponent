@@ -56,11 +56,7 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                     this.value = 1;
                     this.value_check = [1];
                 }
-                NgForm.prototype.ngOnInit = function () {
-                    console.log(this.selectedRecord);
-                };
                 NgForm.prototype.onSubmit = function (form) {
-                    console.log(form.value);
                     this.onSubmitEvent.emit(this.selectedRecord);
                 };
                 __decorate([

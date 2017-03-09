@@ -44,49 +44,7 @@ import 'rxjs/Rx';
           >
             <ng-form [model]="properties" [selectedRecord]="selectedRecord"
                 (onSubmitEvent)="edit ? editEmailConfig($event) : addEmailConfig($event)" ></ng-form>
-                    <form (ngSubmit)="edit ? editEmailConfig(selectedRecord) : addEmailConfig()">
-                        <div class="form-group">
-                          <label for="host">SMTP HOST</label>
-                          <input type="text" class="form-control"  required
-                            [(ngModel)]="selectedRecord.smtpHost"   ngControl="hostctrl" #hostctrl="ngForm"
-                              >
-                          <div [hidden]="hostctrl.valid || hostctrl.pristine" class="alert alert-danger">
-                            Host is required
-                          </div>
-                        </div>
-                        
-                        <div class="form-group">
-                          <label for="port">SMTP PORT</label>
-                          <input type="text" class="form-control"  required
-                            [(ngModel)]="selectedRecord.smtpPort"   ngControl="portctrl" #portctrl="ngForm"
-                              >
-                          <div [hidden]="portctrl.valid || portctrl.pristine" class="alert alert-danger">
-                            Port is required
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <label for="username">USERNAME</label>
-                          <input type="text" class="form-control"  required
-                            [(ngModel)]="selectedRecord.smtpUsername"   ngControl="userctrl" #userctrl="ngForm"
-                              >
-                          <div [hidden]="userctrl.valid || userctrl.pristine" class="alert alert-danger">
-                            Username is required
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <label for="password">PASSWORD</label>
-                          <input type="password" class="form-control"  required
-                            [(ngModel)]="selectedRecord.smtpPassword"   ngControl="pswdctrl" #pswdctrl="ngForm"
-                              >
-                          <div [hidden]="pswdctrl.valid || pswdctrl.pristine" class="alert alert-danger">
-                            Password is required
-                          </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                 
           </ng-popup>
     `,
     directives:[CORE_DIRECTIVES,NgGrid,NgPopup,NgForm],
@@ -94,16 +52,24 @@ import 'rxjs/Rx';
 })
 export class EmailConfigComponent {
 
-    public selectedRecord = {};
-    public data : EmailConfig[];
+    public selectedRecord = {smtpHost:'123', CMB1: '2', CMB2: 'Amaze'};
+    public data = [];
     public showError =  false;
     public edit = false;
+    combo_data = [
+		{id:1,value:"Alto"},
+		{id:2,value:"Amaze"}
+	];
+
     properties = [
-			{type:"text",label:"smtpHost",name="selectedRecord.smtpHost",required: true},
-			{type:"text",label:"smtpPort"name="selectedRecord.smtpPort",required: true},
-                        {type:"text",label:"smtpUsername"name="selectedRecord.smtpUsername",required: true},
-                        {type:"password",label:"smtpPassword"name="selectedRecord.smtpPassword",required: true}
-                 ];
+			{type:"text",label:"smtpHost", name: "smtpHost",required: true},
+			{type:"text",label:"smtpPort", name:"smtpPort",required: true},
+            {type:"text",label:"smtpUsername", name:"smtpUsername",required: true},
+            {type:"password",label:"smtpPassword", name:"smtpPassword",required: true},
+            {type:"combo",label:"Cars",data:this.combo_data,key:"id",value:"value", name:"CMB1",required:true},
+            {type:"combo",label:"Cars",data:this.combo_data,key:"value",value:"id", name:"CMB2",required:true},
+
+        ];
     constructor(private _emailConfig: EmailServerConfigService,
                     private http: Http) {}
     
@@ -111,7 +77,6 @@ export class EmailConfigComponent {
     public dialogAddEditActive ={bool : false}
 
      showAddPopup(){
-        this.selectedRecord = {};
         this.edit = false;
         this.dialogAddEditActive.bool = true;
      }
@@ -168,29 +133,29 @@ export class EmailConfigComponent {
   }
 
     editEmailConfig(record){
-        console.log(record);
-        let data = new URLSearchParams();
-        data.append('id', record.id);
-        data.append('smtpHost', record.smtpHost);
-        data.append('smtpPort', record.smtpPort);
-        data.append('smtpUsername', record.smtpUsername);
-        data.append('smtpPassword', record.smtpPassword);
-        data.append('email', "anshulgupta231193@gmail.com");
-        var headers = new Headers();
-        headers.append("Content-Type", "application/x-www-form-urlencoded");
-        this.http
-          .post('http://localhost:8084/EmailChimp/update-email-configuration', data, {
-                headers: headers
-              })
-            .subscribe(data => {
-                 // window.location.reload();
-            }, error => {
-                console.log(error.json());
-            });
+        // let data = new URLSearchParams();
+        // data.append('id', record.id);
+        // data.append('smtpHost', record.smtpHost);
+        // data.append('smtpPort', record.smtpPort);
+        // data.append('smtpUsername', record.smtpUsername);
+        // data.append('smtpPassword', record.smtpPassword);
+        // data.append('email', "anshulgupta231193@gmail.com");
+        // var headers = new Headers();
+        // headers.append("Content-Type", "application/x-www-form-urlencoded");
+        // this.http
+        //   .post('http://localhost:8084/EmailChimp/update-email-configuration', data, {
+        //         headers: headers
+        //       })
+        //     .subscribe(data => {
+        //          // window.location.reload();
+        //     }, error => {
+        //         console.log(error.json());
+        //     });
     }
     addEmailConfig(record){
-        console.log(record);
-        
+        record.id= new Date().getTime();
+        this.data.push(record);
+        this.closeAddPopup();
     }
 
 }

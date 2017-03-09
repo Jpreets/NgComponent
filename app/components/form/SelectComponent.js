@@ -20,19 +20,22 @@ System.register(["angular2/core"], function(exports_1, context_1) {
         execute: function() {
             SelectComponent = (function () {
                 function SelectComponent() {
-                    console.log(this.select_data); // here it prints `null`
                 }
                 SelectComponent.prototype.ngOnInit = function () {
-                    console.log(this.select_data); // here it prints the actual value
+                    console.log('tttt' + this.selectedCombo);
                 };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Array)
                 ], SelectComponent.prototype, "select_data", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], SelectComponent.prototype, "selectedCombo", void 0);
                 SelectComponent = __decorate([
                     core_1.Component({
                         selector: 'ng-select',
-                        template: "\n\t\t<select *ngIf=\"select_data.key=='id'\" class=\"form-control\">\n\t\t\t<option *ngFor=\"#data of select_data.data\" id={{data.id}} value={{data.value}}>{{data.value}}</option>\n\t\t</select>\n\t\t<select *ngIf=\"select_data.key=='value'\" class=\"form-control\">\n\t\t\t<option *ngFor=\"#data of select_data.data\" id={{data.value}} value={{data.id}}>{{data.id}}</option>\n\t\t</select>\n\t"
+                        template: "\n\t\t<select class=\"form-control\" [(ngModel)]=\"selectedCombo\">\n\t\t\t<option *ngFor=\"#data of select_data.data\"\n\t\t\t value={{data[select_data.key]}} >{{data[select_data.value]}}</option>\n\t\t</select>\n\t"
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SelectComponent);

@@ -6,14 +6,16 @@
         <label>{{prop.label}}</label>
          
           <div *ngSwitchWhen="'combo'">
-            <ng-select [select_data]="prop">Loading...</ng-select>
+            <ng-select [select_data]="prop" [selectedCombo]="selectedRecord[prop.name]"  >Loading...</ng-select>
           </div>
+          
           <div *ngSwitchWhen="'textarea'">
-            <textarea class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
-                ngControl="lastname" ></textarea>
+            <textarea [(ngModel)]="selectedRecord[prop.name]" 
+               class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
+              ></textarea>
           </div>
           <div *ngSwitchDefault>
-              <input [ngModel]="selectedRecord | keys: prop" 
+              <input [(ngModel)]="selectedRecord[prop.name]" 
                   type={{prop.type}} class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
                > 
           </div>
