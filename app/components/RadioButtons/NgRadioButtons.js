@@ -20,9 +20,11 @@ System.register(["angular2/core"], function(exports_1, context_1) {
         execute: function() {
             NgRadioButtons = (function () {
                 function NgRadioButtons() {
+                    this.valueSelectionChange = new core_1.EventEmitter();
                 }
                 NgRadioButtons.prototype.checkData = function (key) {
                     this.value = key.id;
+                    this.valueSelectionChange.emit(key);
                 };
                 NgRadioButtons.prototype.ngOnInit = function () {
                     console.log(this.data);
@@ -41,6 +43,10 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     core_1.Input(), 
                     __metadata('design:type', Object)
                 ], NgRadioButtons.prototype, "value", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], NgRadioButtons.prototype, "valueSelectionChange", void 0);
                 NgRadioButtons = __decorate([
                     core_1.Component({
                         selector: 'ng-radiobuttons',

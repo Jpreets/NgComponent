@@ -20,9 +20,10 @@ System.register(["angular2/core"], function(exports_1, context_1) {
         execute: function() {
             NgCheckBox = (function () {
                 function NgCheckBox() {
+                    this.valueCheckChange = new core_1.EventEmitter();
+                    this.emitCheckData = [];
                 }
                 NgCheckBox.prototype.checkData = function (key) {
-                    console.log(this.value);
                     flag = 0;
                     for (var i = 0; i < this.value.length; i++) {
                         if (key.id == this.value[i]) {
@@ -32,6 +33,15 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     }
                     if (flag == 0)
                         this.value.push(key.id);
+                    for (var i = 0; i < this.data.length; i++) {
+                        for (var j = 0; j < this.value.length; j++) {
+                            if (this.value[j] == this.data[i].id) {
+                                this.emitCheckData.push(this.data[i].value);
+                            }
+                        }
+                    }
+                    this.valueCheckChange.emit(this.emitCheckData);
+                    this.emitCheckData = [];
                 };
                 NgCheckBox.prototype.checkValue = function (key) {
                     for (var i = 0; i < this.value.length; i++) {
@@ -43,8 +53,6 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 };
                 NgCheckBox.prototype.ngOnInit = function () {
                     console.log(this.data);
-                    console.log(this.name);
-                    console.log(this.value);
                 };
                 __decorate([
                     core_1.Input(), 
@@ -58,6 +66,10 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     core_1.Input(), 
                     __metadata('design:type', Array)
                 ], NgCheckBox.prototype, "value", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], NgCheckBox.prototype, "valueCheckChange", void 0);
                 NgCheckBox = __decorate([
                     core_1.Component({
                         selector: 'ng-checkbox',

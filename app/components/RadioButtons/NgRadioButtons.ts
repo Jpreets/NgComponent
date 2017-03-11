@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input,Output, EventEmitter} from "angular2/core";
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
@@ -20,9 +20,11 @@ export class NgRadioButtons{
     @Input() data:[];
     @Input() name;
     @Input() value;
+    @Output() valueSelectionChange = new EventEmitter();
 
     checkData(key){
         this.value = key.id; 
+        this.valueSelectionChange.emit(key);
     }
 
     ngOnInit(){

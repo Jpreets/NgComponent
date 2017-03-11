@@ -42,7 +42,7 @@ import 'rxjs/Rx';
              [title]="title"
              [dialogActive]="dialogAddEditActive" 
           >
-            <ng-form [model]="properties" [selectedRecord]="selectedRecord"
+            <ng-form [gridData]="data" [model]="properties" [selectedRecord]="selectedRecord"
                 (onSubmitEvent)="edit ? editEmailConfig($event) : addEmailConfig($event)" ></ng-form>
                  
           </ng-popup>
@@ -62,14 +62,11 @@ export class EmailConfigComponent {
 	];
 
     properties = [
-			{type:"text",label:"smtpHost", name: "smtpHost",required: true},
-			{type:"text",label:"smtpPort", name:"smtpPort",required: true},
-            {type:"text",label:"smtpUsername", name:"smtpUsername",required: true},
-            {type:"password",label:"smtpPassword", name:"smtpPassword",required: true},
-            {type:"combo",label:"Cars",data:this.combo_data,key:"id",value:"value", name:"CMB1",required:true},
-            {type:"combo",label:"Cars",data:this.combo_data,key:"value",value:"id", name:"CMB2",required:true},
-
-        ];
+            			{type:"text",label:"smtpHost", name: "smtpHost",required: true},
+            			{type:"text",label:"smtpPort", name:"smtpPort",required: true},
+                  {type:"text",label:"smtpUsername", name:"smtpUsername",required: true},
+                  {type:"password",label:"smtpPassword", name:"smtpPassword",required: true},
+            ];
     constructor(private _emailConfig: EmailServerConfigService,
                     private http: Http) {}
     
@@ -77,12 +74,12 @@ export class EmailConfigComponent {
     public dialogAddEditActive ={bool : false}
 
      showAddPopup(){
+        this.selectedRecord = {};
         this.edit = false;
         this.dialogAddEditActive.bool = true;
      }
      
      closeAddPopup(){
-        this.selectedRecord = {};
         this.dialogAddEditActive.bool = false;
      }
      showEditPopup(){
@@ -124,38 +121,60 @@ export class EmailConfigComponent {
     {id:'smtpHost', value:'Host'},
     {id:'smtpPort', value:'Port'},
     {id:'smtpUsername', value:'Username'},
-    {id:'smtpPassword', value:'Password'}
+    {id:'smtpPassword', value:'Password'},
+    {id:'vehicleRadio', value:'Vehicle'},
+    {id:'vehicleCheck', value:'Vehicles'}
       ];
-
+    
 
   getSelectedRecord(event) {
        this.selectedRecord= event;
   }
 
     editEmailConfig(record){
-        // let data = new URLSearchParams();
-        // data.append('id', record.id);
-        // data.append('smtpHost', record.smtpHost);
-        // data.append('smtpPort', record.smtpPort);
-        // data.append('smtpUsername', record.smtpUsername);
-        // data.append('smtpPassword', record.smtpPassword);
-        // data.append('email', "anshulgupta231193@gmail.com");
-        // var headers = new Headers();
-        // headers.append("Content-Type", "application/x-www-form-urlencoded");
-        // this.http
-        //   .post('http://localhost:8084/EmailChimp/update-email-configuration', data, {
-        //         headers: headers
-        //       })
-        //     .subscribe(data => {
-        //          // window.location.reload();
-        //     }, error => {
-        //         console.log(error.json());
-        //     });
+        let data = new URLSearchParams();
+        data.append('id', record.id);
+        data.append('smtpHost', record.smtpHost);
+        data.append('smtpPort', record.smtpPort);
+        data.append('smtpUsername', record.smtpUsername);
+        data.append('smtpPassword', record.smtpPassword);
+        data.append('vehicleRadio', record.vehicleRadio);
+        data.append('vehicleCheck', record.vehicleCheck);
+        data.append('email', "anshulgupta231193@gmail.com");
+        var headers = new Headers();
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        this.http
+          .post('http://localhost:8084/EmailChimp/update-email-configuration', data, {
+                headers: headers
+              })
+            .subscribe(data => {
+                  this.closeEditPopup();
+            }, error => {
+                console.log(error.json());
+            });
     }
     addEmailConfig(record){
-        record.id= new Date().getTime();
-        this.data.push(record);
-        this.closeAddPopup();
+        let data = new URLSearchParams();
+        data.append('smtpHost', record.smtpHost);
+        data.append('smtpPort', record.smtpPort);
+        data.append('smtpUsername', record.smtpUsername);
+        data.append('smtpPassword', record.smtpPassword);
+        data.append('vehicleRadio', record.vehicleRadio);
+        data.append('vehicleCheck', record.vehicleCheck);
+        data.append('email', "anshulgupta231193@gmail.com");
+        var headers = new Headers();
+        headers.append("Content-Type", "application/x-www-form-urlencoded");
+        this.http
+          .post('http://localhost:8084/EmailChimp/add-email-configuration', data, {
+                headers: headers
+              })
+            .subscribe(data => {
+                 this.closeAddPopup();
+                 window.location.reload();            
+
+            }, error => {
+                console.log(error.json());
+            });
     }
 
 }

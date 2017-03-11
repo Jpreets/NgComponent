@@ -26,9 +26,11 @@ export class KeysPipe implements PipeTransform {
 
 export class NgForm{ 
 	    @Input() model:[];
+        @Input() gridData:[];
         @Input() public selectedRecord;
         @Output() onSubmitEvent = new EventEmitter();
-	    
+	    public vehicleRadio;
+
         constructor() {}
 
         name = "vehicles";
@@ -36,10 +38,39 @@ export class NgForm{
             {id:1,value:"Bike"},
             {id:2,value:"Car"}
         ];
-        value=1;
-        value_check=[1];
+        value;
+        value_check=[];
         
+        getSelectedValue(event){
+            if(!this.selectedRecord.id){
+                this.selectedRecord.vehicleRadio = event.value;
+            }
+            for(var i=0;i<this.gridData.length;i++){
+                if(this.gridData[i].id == this.selectedRecord.id){
+                    // this.gridData[i].vehicleRadio = event.value;
+                    this.selectedRecord.vehicleRadio = event.value;
+                }
+            }
+        }
+
+        getSelectedCheck(event){
+            if(!this.selectedRecord.id){
+                this.selectedRecord.vehicleCheck = event;
+            }
+            for(var i=0;i<this.gridData.length;i++){
+                if(this.gridData[i].id == this.selectedRecord.id){
+                    // this.gridData[i].vehicleCheck = event;
+                    this.selectedRecord.vehicleCheck = event;
+                }
+            }
+        }
+
         onSubmit(form: NgForm) {
+            console.log(this.selectedRecord);
             this.onSubmitEvent.emit(this.selectedRecord);
+            this.value_check=[];
+            this.selectedRecord=[];
+            this.value=-1;
+            console.log(this.value_check+" "+this.value);
         }
 }

@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input, ,Output, EventEmitter} from "angular2/core";
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
@@ -20,9 +20,10 @@ export class NgCheckBox{
     @Input() data:[];
     @Input() name;
     @Input() value:[];
-
+    @Output() valueCheckChange = new EventEmitter();
+    public emitCheckData= []; 
+        
     checkData(key){
-        console.log(this.value);
         flag = 0;
         for(var i=0;i<this.value.length;i++){
             if(key.id == this.value[i]){
@@ -32,6 +33,15 @@ export class NgCheckBox{
         }
         if(flag == 0)
             this.value.push(key.id);
+        for(var i=0;i<this.data.length;i++){
+            for(var j=0;j<this.value.length;j++){
+                if(this.value[j] == this.data[i].id){
+                    this.emitCheckData.push(this.data[i].value);
+                }
+            }
+        }
+        this.valueCheckChange.emit(this.emitCheckData);
+        this.emitCheckData= [];
     }
     
     checkValue(key){
@@ -45,8 +55,6 @@ export class NgCheckBox{
 
     ngOnInit(){
         console.log(this.data);
-        console.log(this.name);
-        console.log(this.value);
     }
 
 }

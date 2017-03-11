@@ -54,8 +54,6 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                         { type: "text", label: "smtpPort", name: "smtpPort", required: true },
                         { type: "text", label: "smtpUsername", name: "smtpUsername", required: true },
                         { type: "password", label: "smtpPassword", name: "smtpPassword", required: true },
-                        { type: "combo", label: "Cars", data: this.combo_data, key: "id", value: "value", name: "CMB1", required: true },
-                        { type: "combo", label: "Cars", data: this.combo_data, key: "value", value: "id", name: "CMB2", required: true },
                     ];
                     this.dialogActive = { bool: false };
                     this.dialogAddEditActive = { bool: false };
@@ -65,15 +63,17 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                         { id: 'smtpHost', value: 'Host' },
                         { id: 'smtpPort', value: 'Port' },
                         { id: 'smtpUsername', value: 'Username' },
-                        { id: 'smtpPassword', value: 'Password' }
+                        { id: 'smtpPassword', value: 'Password' },
+                        { id: 'vehicleRadio', value: 'Vehicle' },
+                        { id: 'vehicleCheck', value: 'Vehicles' }
                     ];
                 }
                 EmailConfigComponent.prototype.showAddPopup = function () {
+                    this.selectedRecord = {};
                     this.edit = false;
                     this.dialogAddEditActive.bool = true;
                 };
                 EmailConfigComponent.prototype.closeAddPopup = function () {
-                    this.selectedRecord = {};
                     this.dialogAddEditActive.bool = false;
                 };
                 EmailConfigComponent.prototype.showEditPopup = function () {
@@ -105,33 +105,54 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                     this.selectedRecord = event;
                 };
                 EmailConfigComponent.prototype.editEmailConfig = function (record) {
-                    // let data = new URLSearchParams();
-                    // data.append('id', record.id);
-                    // data.append('smtpHost', record.smtpHost);
-                    // data.append('smtpPort', record.smtpPort);
-                    // data.append('smtpUsername', record.smtpUsername);
-                    // data.append('smtpPassword', record.smtpPassword);
-                    // data.append('email', "anshulgupta231193@gmail.com");
-                    // var headers = new Headers();
-                    // headers.append("Content-Type", "application/x-www-form-urlencoded");
-                    // this.http
-                    //   .post('http://localhost:8084/EmailChimp/update-email-configuration', data, {
-                    //         headers: headers
-                    //       })
-                    //     .subscribe(data => {
-                    //          // window.location.reload();
-                    //     }, error => {
-                    //         console.log(error.json());
-                    //     });
+                    var _this = this;
+                    var data = new http_1.URLSearchParams();
+                    data.append('id', record.id);
+                    data.append('smtpHost', record.smtpHost);
+                    data.append('smtpPort', record.smtpPort);
+                    data.append('smtpUsername', record.smtpUsername);
+                    data.append('smtpPassword', record.smtpPassword);
+                    data.append('vehicleRadio', record.vehicleRadio);
+                    data.append('vehicleCheck', record.vehicleCheck);
+                    data.append('email', "anshulgupta231193@gmail.com");
+                    var headers = new http_1.Headers();
+                    headers.append("Content-Type", "application/x-www-form-urlencoded");
+                    this.http
+                        .post('http://localhost:8084/EmailChimp/update-email-configuration', data, {
+                        headers: headers
+                    })
+                        .subscribe(function (data) {
+                        _this.closeEditPopup();
+                    }, function (error) {
+                        console.log(error.json());
+                    });
                 };
                 EmailConfigComponent.prototype.addEmailConfig = function (record) {
-                    record.id = new Date().getTime();
-                    this.data.push(record);
-                    this.closeAddPopup();
+                    var _this = this;
+                    var data = new http_1.URLSearchParams();
+                    data.append('smtpHost', record.smtpHost);
+                    data.append('smtpPort', record.smtpPort);
+                    data.append('smtpUsername', record.smtpUsername);
+                    data.append('smtpPassword', record.smtpPassword);
+                    data.append('vehicleRadio', record.vehicleRadio);
+                    data.append('vehicleCheck', record.vehicleCheck);
+                    data.append('email', "anshulgupta231193@gmail.com");
+                    var headers = new http_1.Headers();
+                    headers.append("Content-Type", "application/x-www-form-urlencoded");
+                    this.http
+                        .post('http://localhost:8084/EmailChimp/add-email-configuration', data, {
+                        headers: headers
+                    })
+                        .subscribe(function (data) {
+                        _this.closeAddPopup();
+                        window.location.reload();
+                    }, function (error) {
+                        console.log(error.json());
+                    });
                 };
                 EmailConfigComponent = __decorate([
                     core_1.Component({
-                        template: "\n    <button type=\"button\" (click)=\"showAddPopup()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>\n                Add</button>\n    <button *ngIf=\"!selectedRecord.id\" type=\"button\" class=\"btn btn-info disabled\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button *ngIf=\"selectedRecord.id\" (click)=\"showEditPopup()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button *ngIf=\"!selectedRecord.id\" type=\"button\" class=\"btn btn-info disabled\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                Delete</button>\n    <button *ngIf=\"selectedRecord.id\" (click)=\"delete()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Delete</button>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n                [dialogActive]=\"dialogAddEditActive\"\n                [selectedRecord]=\"selectedRecord\"\n            >\n            </ng-grid>\n            <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n             [hidden]=\"!showError\"\n            >\n             <h3>Server Down</h3>\n          </ng-popup>\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogAddEditActive\" \n          >\n            <ng-form [model]=\"properties\" [selectedRecord]=\"selectedRecord\"\n                (onSubmitEvent)=\"edit ? editEmailConfig($event) : addEmailConfig($event)\" ></ng-form>\n                 \n          </ng-popup>\n    ",
+                        template: "\n    <button type=\"button\" (click)=\"showAddPopup()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>\n                Add</button>\n    <button *ngIf=\"!selectedRecord.id\" type=\"button\" class=\"btn btn-info disabled\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button *ngIf=\"selectedRecord.id\" (click)=\"showEditPopup()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button *ngIf=\"!selectedRecord.id\" type=\"button\" class=\"btn btn-info disabled\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n                Delete</button>\n    <button *ngIf=\"selectedRecord.id\" (click)=\"delete()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Delete</button>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n                [dialogActive]=\"dialogAddEditActive\"\n                [selectedRecord]=\"selectedRecord\"\n            >\n            </ng-grid>\n            <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n             [hidden]=\"!showError\"\n            >\n             <h3>Server Down</h3>\n          </ng-popup>\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogAddEditActive\" \n          >\n            <ng-form [gridData]=\"data\" [model]=\"properties\" [selectedRecord]=\"selectedRecord\"\n                (onSubmitEvent)=\"edit ? editEmailConfig($event) : addEmailConfig($event)\" ></ng-form>\n                 \n          </ng-popup>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgGrid_1.NgGrid, NgPopup_1.NgPopup, NgForm_1.NgForm],
                         providers: [EmailServerConfigService_1.EmailServerConfigService, http_1.HTTP_PROVIDERS]
                     }), 
