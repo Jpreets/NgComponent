@@ -48,13 +48,12 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
             NgForm = (function () {
                 function NgForm() {
                     this.onSubmitEvent = new core_1.EventEmitter();
-                    this.name = "vehicles";
-                    this.data = [
-                        { id: 1, value: "Bike" },
-                        { id: 2, value: "Car" }
-                    ];
                     this.value_check = [];
+                    this.checkRadioData = [];
+                    this.name = "vehicles";
                 }
+                NgForm.prototype.ngOnInit = function () {
+                };
                 NgForm.prototype.getSelectedValue = function (event) {
                     if (!this.selectedRecord.id) {
                         this.selectedRecord.vehicleRadio = event.value;
@@ -101,6 +100,18 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], NgForm.prototype, "onSubmitEvent", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], NgForm.prototype, "value", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], NgForm.prototype, "value_check", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Object)
+                ], NgForm.prototype, "checkRadioData", void 0);
                 NgForm = __decorate([
                     core_1.Component({
                         selector: 'ng-form',

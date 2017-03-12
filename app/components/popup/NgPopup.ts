@@ -35,7 +35,6 @@ export class NgPopup {
  @Input() public dialogActive;
 
     ngOnInit(){
-        console.log(this.dialogActive);
    }
  closePopup(){
     this.dialogActive.bool =false;

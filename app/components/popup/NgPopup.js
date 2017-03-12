@@ -26,7 +26,6 @@ System.register(['angular2/core', 'angular2/common'], function(exports_1, contex
                     this.title = '';
                 }
                 NgPopup.prototype.ngOnInit = function () {
-                    console.log(this.dialogActive);
                 };
                 NgPopup.prototype.closePopup = function () {
                     this.dialogActive.bool = false;
