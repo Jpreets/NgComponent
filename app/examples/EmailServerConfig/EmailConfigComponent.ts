@@ -14,13 +14,9 @@ import 'rxjs/Rx';
     template: `
     <button type="button" (click)="showAddPopup()" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>
                 Add</button>
-    <button *ngIf="!selectedRecord.id" type="button" class="btn btn-info disabled"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    <button [ngClass]="{disabled : !selectedRecord.id}" (click)="showEditPopup()" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 Edit</button>
-    <button *ngIf="selectedRecord.id" (click)="showEditPopup()" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                Edit</button>
-    <button *ngIf="!selectedRecord.id" type="button" class="btn btn-info disabled"><i class="fa fa-trash" aria-hidden="true"></i>
-                Delete</button>
-    <button *ngIf="selectedRecord.id" (click)="delete()" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    <button [ngClass]="{disabled : !selectedRecord.id}" (click)="delete()" type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 Delete</button>
       <ng-grid 
                 [title]="title"
