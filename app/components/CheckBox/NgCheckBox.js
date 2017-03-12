@@ -52,7 +52,6 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     return false;
                 };
                 NgCheckBox.prototype.ngOnInit = function () {
-                    console.log(this.data);
                 };
                 __decorate([
                     core_1.Input(), 

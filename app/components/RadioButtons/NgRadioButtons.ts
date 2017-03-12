@@ -28,8 +28,6 @@ export class NgRadioButtons{
     }
 
     ngOnInit(){
-        console.log(this.data);
-        console.log(this.name);
         console.log(this.value);
     }
 

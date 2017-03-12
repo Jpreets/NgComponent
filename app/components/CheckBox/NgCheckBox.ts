@@ -54,7 +54,6 @@ export class NgCheckBox{
     }
 
     ngOnInit(){
-        console.log(this.data);
     }
 
 }

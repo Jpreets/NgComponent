@@ -29,18 +29,18 @@ export class NgForm{
         @Input() gridData:[];
         @Input() public selectedRecord;
         @Output() onSubmitEvent = new EventEmitter();
-	    public vehicleRadio;
+	    @Input() public value;
+        @Input() public value_check=[];
+        @Input() public checkRadioData=[];
+        public vehicleRadio;
 
         constructor() {}
-
-        name = "vehicles";
-        data = [
-            {id:1,value:"Bike"},
-            {id:2,value:"Car"}
-        ];
-        value;
-        value_check=[];
         
+        name = "vehicles";
+        
+        
+        ngOnInit(){
+        }
         getSelectedValue(event){
             if(!this.selectedRecord.id){
                 this.selectedRecord.vehicleRadio = event.value;

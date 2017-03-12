@@ -27,8 +27,6 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     this.valueSelectionChange.emit(key);
                 };
                 NgRadioButtons.prototype.ngOnInit = function () {
-                    console.log(this.data);
-                    console.log(this.name);
                     console.log(this.value);
                 };
                 __decorate([

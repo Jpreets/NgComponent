@@ -42,7 +42,8 @@ import 'rxjs/Rx';
              [title]="title"
              [dialogActive]="dialogAddEditActive" 
           >
-            <ng-form [gridData]="data" [model]="properties" [selectedRecord]="selectedRecord"
+            <ng-form [value]="value" [value_check]="value_check" [checkRadioData]="checkRadioData"
+             [gridData]="data" [model]="properties" [selectedRecord]="selectedRecord"
                 (onSubmitEvent)="edit ? editEmailConfig($event) : addEmailConfig($event)" ></ng-form>
                  
           </ng-popup>
@@ -52,15 +53,21 @@ import 'rxjs/Rx';
 })
 export class EmailConfigComponent {
 
-    public selectedRecord = {smtpHost:'123', CMB1: '2', CMB2: 'Amaze'};
+    public selectedRecord = {};
     public data = [];
+    
+    public value;
+    public value_check=[];
     public showError =  false;
     public edit = false;
     combo_data = [
 		{id:1,value:"Alto"},
 		{id:2,value:"Amaze"}
 	];
-
+    checkRadioData = [
+            {id:1,value:"Bike"},
+            {id:2,value:"Car"}
+        ];
     properties = [
             			{type:"text",label:"smtpHost", name: "smtpHost",required: true},
             			{type:"text",label:"smtpPort", name:"smtpPort",required: true},
@@ -83,12 +90,29 @@ export class EmailConfigComponent {
         this.dialogAddEditActive.bool = false;
      }
      showEditPopup(){
+        this.value_check=[];
         this.edit = true;
         this.dialogAddEditActive.bool = true;
-     }
+        for(var i=0;i<this.checkRadioData.length;i++){
+          if(this.selectedRecord.vehicleRadio == this.checkRadioData[i].value){
+            this.value=this.checkRadioData[i].id;
+          }
+        }
+        res = this.selectedRecord.vehicleCheck.split(",");
+        console.log(res);
+        console.log(this.checkRadioData);
+        for(var i=0;i<this.checkRadioData.length;i++){
+          for(var j=0;j<res.length;j++){
+            if(res[j] == this.checkRadioData[i].value){
+              this.value_check.push(this.checkRadioData[i].id);
+            }
+          }
+        }
+    }
      
      closeEditPopup(){
         this.dialogAddEditActive.bool = false;
+        console.log(this.value);
      }
      showPopup(){
         this.dialogActive.bool =true;

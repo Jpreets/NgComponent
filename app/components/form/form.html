@@ -21,8 +21,8 @@
           </div>
         </div>
         </div>
-        <ng-radiobuttons (valueSelectionChange)="getSelectedValue($event);"  [name]="name" [value]="value" [data]="data"></ng-radiobuttons>
-        <ng-checkbox (valueCheckChange)="getSelectedCheck($event);" [name]="name" [value]="value_check" [data]="data"></ng-checkbox>
+        <ng-radiobuttons (valueSelectionChange)="getSelectedValue($event);"  [name]="name" [value]="value" [data]="checkRadioData"></ng-radiobuttons>
+        <ng-checkbox (valueCheckChange)="getSelectedCheck($event);" [name]="name" [value]="value_check" [data]="checkRadioData"></ng-checkbox>
         
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
