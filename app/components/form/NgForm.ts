@@ -29,9 +29,7 @@ export class NgForm{
         @Input() gridData:[];
         @Input() public selectedRecord;
         @Output() onSubmitEvent = new EventEmitter();
-	    @Input() public value;
-        @Input() public value_check=[];
-        @Input() public checkRadioData=[];
+	    @Input() public value_check=[];
         public vehicleRadio;
 
         constructor() {}

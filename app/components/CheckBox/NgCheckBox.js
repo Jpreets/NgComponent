@@ -1,3 +1,6 @@
+/*
+** @anshul
+*/
 System.register(["angular2/core"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
@@ -44,11 +47,12 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     this.emitCheckData = [];
                 };
                 NgCheckBox.prototype.checkValue = function (key) {
-                    for (var i = 0; i < this.value.length; i++) {
-                        if (key.id == this.value[i]) {
-                            return true;
+                    if (this.value != undefined)
+                        for (var i = 0; i < this.value.length; i++) {
+                            if (key.id == this.value[i]) {
+                                return true;
+                            }
                         }
-                    }
                     return false;
                 };
                 NgCheckBox.prototype.ngOnInit = function () {
@@ -72,7 +76,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgCheckBox = __decorate([
                     core_1.Component({
                         selector: 'ng-checkbox',
-                        template: "\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"checkValue(key) ?'fa fa-check-square-o' : 'fa fa-square-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\"></i>{{key.value}}\n               <br><br>\n           </div>\n    ",
+                        template: "\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"checkValue(key) ?'fa fa-check-square-o' : 'fa fa-square-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\"></i>{{key.value}}\n               <br><br>\n           </div>\n    ",
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgCheckBox);

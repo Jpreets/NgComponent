@@ -27,7 +27,6 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     this.valueSelectionChange.emit(key);
                 };
                 NgRadioButtons.prototype.ngOnInit = function () {
-                    console.log(this.value);
                 };
                 __decorate([
                     core_1.Input(), 
@@ -48,7 +47,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NgRadioButtons = __decorate([
                     core_1.Component({
                         selector: 'ng-radiobuttons',
-                        template: "\n            <h3>{{name}}</h3>\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"key.id==value ?'fa fa-check-circle-o' : 'fa fa-circle-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\"></i>{{key.value}}\n               <br><br>\n             </div>\n    ",
+                        template: "\n            <div *ngFor='#key of data'>\n             <i [ngClass]=\"key.id==value ?'fa fa-check-circle-o' : 'fa fa-circle-o'\"\n                   style=\"font-size:20px\"\n                   (click)=\"checkData(key)\"\n                   aria-hidden=\"true\"></i>{{key.value}}\n               <br><br>\n             </div>\n    ",
                     }), 
                     __metadata('design:paramtypes', [])
                 ], NgRadioButtons);

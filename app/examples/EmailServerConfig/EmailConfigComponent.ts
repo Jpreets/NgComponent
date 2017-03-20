@@ -38,9 +38,12 @@ import 'rxjs/Rx';
              [title]="title"
              [dialogActive]="dialogAddEditActive" 
           >
-            <ng-form [value]="value" [value_check]="value_check" [checkRadioData]="checkRadioData"
-             [gridData]="data" [model]="properties" [selectedRecord]="selectedRecord"
-                (onSubmitEvent)="edit ? editEmailConfig($event) : addEmailConfig($event)" ></ng-form>
+            <ng-form 
+              [gridData]="data" 
+              [model]="properties" 
+              [selectedRecord]="selectedRecord"
+              (onSubmitEvent)="edit ? editEmailConfig($event) : addEmailConfig($event)" >
+            </ng-form>
                  
           </ng-popup>
     `,
@@ -64,20 +67,16 @@ export class EmailConfigComponent {
             {id:1,value:"Bike"},
             {id:2,value:"Car"}
         ];
-    properties = [
-            			{type:"text",label:"smtpHost", name: "smtpHost",required: true},
-            			{type:"text",label:"smtpPort", name:"smtpPort",required: true},
-                  {type:"text",label:"smtpUsername", name:"smtpUsername",required: true},
-                  {type:"password",label:"smtpPassword", name:"smtpPassword",required: true},
-            ];
+    
     constructor(private _emailConfig: EmailServerConfigService,
                     private http: Http) {}
     
     public dialogActive ={bool : false};
     public dialogAddEditActive ={bool : false}
 
-     showAddPopup(){
+     showAddPopup(){                                                                                                                                                                                                                                                            
         this.selectedRecord = {};
+        this.selectedRecord.checkId=[];
         this.edit = false;
         this.dialogAddEditActive.bool = true;
      }
@@ -87,28 +86,23 @@ export class EmailConfigComponent {
      }
      showEditPopup(){
         this.value_check=[];
-        this.edit = true;
+        this.edit = true;                                                                                                                                                                                                                                                         
         this.dialogAddEditActive.bool = true;
+        console.log(this.data);
         for(var i=0;i<this.checkRadioData.length;i++){
-          if(this.selectedRecord.vehicleRadio == this.checkRadioData[i].value){
-            this.value=this.checkRadioData[i].id;
+          if(this.checkRadioData[i].value == this.selectedRecord.vehicleRadio){
+            this.selectedRecord.radioId = this.checkRadioData[i].id;
           }
         }
-        res = this.selectedRecord.vehicleCheck.split(",");
-        console.log(res);
-        console.log(this.checkRadioData);
-        for(var i=0;i<this.checkRadioData.length;i++){
-          for(var j=0;j<res.length;j++){
-            if(res[j] == this.checkRadioData[i].value){
-              this.value_check.push(this.checkRadioData[i].id);
-            }
-          }
+        this.selectedRecord.checkId=[];
+        for(var i=0;i<this.selectedRecord.checkBox.length;i++){
+          this.selectedRecord.checkId.push(this.selectedRecord.checkBox[i].checkId);
         }
+        console.log(this.selectedRecord);
     }
      
      closeEditPopup(){
         this.dialogAddEditActive.bool = false;
-        console.log(this.value);
      }
      showPopup(){
         this.dialogActive.bool =true;
@@ -132,8 +126,17 @@ export class EmailConfigComponent {
 
    ngOnInit(){
       this.getContacts();
-   }
+      console.log(this.data);                                                                                                                                                                                                                                                             
+  }
 
+   properties = [
+                  {type:"text",label:"smtpHost", name: "smtpHost",required: true},
+                  {type:"text",label:"smtpPort", name:"smtpPort",required: true},
+                  {type:"text",label:"smtpUsername", name:"smtpUsername",required: true},
+                  {type:"password",label:"smtpPassword", name:"smtpPassword",required: true},
+                  {type:"radio",label:"vehicle", name:"vehicleRadio", value:this.value, checkRadioData:this.checkRadioData, required: true},
+                  {type:"check",label:"vehicles", name:"vehicleCheck", value_check: this.value_check,checkRadioData:this.checkRadioData, required: true}
+            ];
     public title = 'Email Configurations'
   
   public columns=[
@@ -149,6 +152,7 @@ export class EmailConfigComponent {
 
   getSelectedRecord(event) {
        this.selectedRecord= event;
+       console.log(event);
   }
 
     editEmailConfig(record){
@@ -174,6 +178,17 @@ export class EmailConfigComponent {
             });
     }
     addEmailConfig(record){
+      if(record.vehicleCheck == undefined)
+        record.vehicleCheck = [];
+      checkId = [];
+      for(var i=0;i<record.vehicleCheck.length;i++){
+        for(var j=0;j<this.checkRadioData.length;j++){
+          if(record.vehicleCheck[i] == this.checkRadioData[j].value){
+            checkId.push(this.checkRadioData[j].id);
+          }
+        }
+      }
+      console.log(checkId);
         let data = new URLSearchParams();
         data.append('smtpHost', record.smtpHost);
         data.append('smtpPort', record.smtpPort);
@@ -181,6 +196,7 @@ export class EmailConfigComponent {
         data.append('smtpPassword', record.smtpPassword);
         data.append('vehicleRadio', record.vehicleRadio);
         data.append('vehicleCheck', record.vehicleCheck);
+        data.append('checkId', checkId);
         data.append('email', "anshulgupta231193@gmail.com");
         var headers = new Headers();
         headers.append("Content-Type", "application/x-www-form-urlencoded");

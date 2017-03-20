@@ -4,7 +4,6 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 @Component({
     selector: 'ng-radiobuttons'
     template: `
-            <h3>{{name}}</h3>
             <div *ngFor='#key of data'>
              <i [ngClass]="key.id==value ?'fa fa-check-circle-o' : 'fa fa-circle-o'"
                    style="font-size:20px"
@@ -28,7 +27,7 @@ export class NgRadioButtons{
     }
 
     ngOnInit(){
-        console.log(this.value);
+       
     }
 
 }

@@ -54,14 +54,16 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                         { id: 1, value: "Bike" },
                         { id: 2, value: "Car" }
                     ];
+                    this.dialogActive = { bool: false };
+                    this.dialogAddEditActive = { bool: false };
                     this.properties = [
                         { type: "text", label: "smtpHost", name: "smtpHost", required: true },
                         { type: "text", label: "smtpPort", name: "smtpPort", required: true },
                         { type: "text", label: "smtpUsername", name: "smtpUsername", required: true },
                         { type: "password", label: "smtpPassword", name: "smtpPassword", required: true },
+                        { type: "radio", label: "vehicle", name: "vehicleRadio", value: this.value, checkRadioData: this.checkRadioData, required: true },
+                        { type: "check", label: "vehicles", name: "vehicleCheck", value_check: this.value_check, checkRadioData: this.checkRadioData, required: true }
                     ];
-                    this.dialogActive = { bool: false };
-                    this.dialogAddEditActive = { bool: false };
                     this.title = 'Email Configurations';
                     this.columns = [
                         { id: 'id', value: '#' },
@@ -75,6 +77,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                 }
                 EmailConfigComponent.prototype.showAddPopup = function () {
                     this.selectedRecord = {};
+                    this.selectedRecord.checkId = [];
                     this.edit = false;
                     this.dialogAddEditActive.bool = true;
                 };
@@ -85,25 +88,20 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                     this.value_check = [];
                     this.edit = true;
                     this.dialogAddEditActive.bool = true;
+                    console.log(this.data);
                     for (var i = 0; i < this.checkRadioData.length; i++) {
-                        if (this.selectedRecord.vehicleRadio == this.checkRadioData[i].value) {
-                            this.value = this.checkRadioData[i].id;
+                        if (this.checkRadioData[i].value == this.selectedRecord.vehicleRadio) {
+                            this.selectedRecord.radioId = this.checkRadioData[i].id;
                         }
                     }
-                    res = this.selectedRecord.vehicleCheck.split(",");
-                    console.log(res);
-                    console.log(this.checkRadioData);
-                    for (var i = 0; i < this.checkRadioData.length; i++) {
-                        for (var j = 0; j < res.length; j++) {
-                            if (res[j] == this.checkRadioData[i].value) {
-                                this.value_check.push(this.checkRadioData[i].id);
-                            }
-                        }
+                    this.selectedRecord.checkId = [];
+                    for (var i = 0; i < this.selectedRecord.checkBox.length; i++) {
+                        this.selectedRecord.checkId.push(this.selectedRecord.checkBox[i].checkId);
                     }
+                    console.log(this.selectedRecord);
                 };
                 EmailConfigComponent.prototype.closeEditPopup = function () {
                     this.dialogAddEditActive.bool = false;
-                    console.log(this.value);
                 };
                 EmailConfigComponent.prototype.showPopup = function () {
                     this.dialogActive.bool = true;
@@ -122,9 +120,11 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                 };
                 EmailConfigComponent.prototype.ngOnInit = function () {
                     this.getContacts();
+                    console.log(this.data);
                 };
                 EmailConfigComponent.prototype.getSelectedRecord = function (event) {
                     this.selectedRecord = event;
+                    console.log(event);
                 };
                 EmailConfigComponent.prototype.editEmailConfig = function (record) {
                     var _this = this;
@@ -151,6 +151,17 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                 };
                 EmailConfigComponent.prototype.addEmailConfig = function (record) {
                     var _this = this;
+                    if (record.vehicleCheck == undefined)
+                        record.vehicleCheck = [];
+                    checkId = [];
+                    for (var i = 0; i < record.vehicleCheck.length; i++) {
+                        for (var j = 0; j < this.checkRadioData.length; j++) {
+                            if (record.vehicleCheck[i] == this.checkRadioData[j].value) {
+                                checkId.push(this.checkRadioData[j].id);
+                            }
+                        }
+                    }
+                    console.log(checkId);
                     var data = new http_1.URLSearchParams();
                     data.append('smtpHost', record.smtpHost);
                     data.append('smtpPort', record.smtpPort);
@@ -158,6 +169,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                     data.append('smtpPassword', record.smtpPassword);
                     data.append('vehicleRadio', record.vehicleRadio);
                     data.append('vehicleCheck', record.vehicleCheck);
+                    data.append('checkId', checkId);
                     data.append('email', "anshulgupta231193@gmail.com");
                     var headers = new http_1.Headers();
                     headers.append("Content-Type", "application/x-www-form-urlencoded");
@@ -174,7 +186,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                 };
                 EmailConfigComponent = __decorate([
                     core_1.Component({
-                        template: "\n    <button type=\"button\" (click)=\"showAddPopup()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>\n                Add</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"showEditPopup()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"delete()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Delete</button>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n                [dialogActive]=\"dialogAddEditActive\"\n                [selectedRecord]=\"selectedRecord\"\n            >\n            </ng-grid>\n            <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n             [hidden]=\"!showError\"\n            >\n             <h3>Server Down</h3>\n          </ng-popup>\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogAddEditActive\" \n          >\n            <ng-form [value]=\"value\" [value_check]=\"value_check\" [checkRadioData]=\"checkRadioData\"\n             [gridData]=\"data\" [model]=\"properties\" [selectedRecord]=\"selectedRecord\"\n                (onSubmitEvent)=\"edit ? editEmailConfig($event) : addEmailConfig($event)\" ></ng-form>\n                 \n          </ng-popup>\n    ",
+                        template: "\n    <button type=\"button\" (click)=\"showAddPopup()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>\n                Add</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"showEditPopup()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"delete()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Delete</button>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n                [dialogActive]=\"dialogAddEditActive\"\n                [selectedRecord]=\"selectedRecord\"\n            >\n            </ng-grid>\n            <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n             [hidden]=\"!showError\"\n            >\n             <h3>Server Down</h3>\n          </ng-popup>\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogAddEditActive\" \n          >\n            <ng-form \n              [gridData]=\"data\" \n              [model]=\"properties\" \n              [selectedRecord]=\"selectedRecord\"\n              (onSubmitEvent)=\"edit ? editEmailConfig($event) : addEmailConfig($event)\" >\n            </ng-form>\n                 \n          </ng-popup>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgGrid_1.NgGrid, NgPopup_1.NgPopup, NgForm_1.NgForm],
                         providers: [EmailServerConfigService_1.EmailServerConfigService, http_1.HTTP_PROVIDERS]
                     }), 

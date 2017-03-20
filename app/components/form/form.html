@@ -14,6 +14,14 @@
                class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
               ></textarea>
           </div>
+          <div *ngSwitchWhen="'radio'">
+              <ng-radiobuttons (valueSelectionChange)="getSelectedValue($event);"  [name]="name" 
+              [value]="selectedRecord.radioId" [data]="prop.checkRadioData"></ng-radiobuttons>
+          </div>
+          <div *ngSwitchWhen="'check'">
+              <ng-checkbox (valueCheckChange)="getSelectedCheck($event);" [name]="name" 
+              [value]="selectedRecord.checkId" [data]="prop.checkRadioData"></ng-checkbox>
+          </div>
           <div *ngSwitchDefault>
               <input [(ngModel)]="selectedRecord[prop.name]" 
                   type={{prop.type}} class="form-control" placeholder="{{prop.label}}" required={{prop.required}}
@@ -21,8 +29,6 @@
           </div>
         </div>
         </div>
-        <ng-radiobuttons (valueSelectionChange)="getSelectedValue($event);"  [name]="name" [value]="value" [data]="checkRadioData"></ng-radiobuttons>
-        <ng-checkbox (valueCheckChange)="getSelectedCheck($event);" [name]="name" [value]="value_check" [data]="checkRadioData"></ng-checkbox>
         
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -49,7 +49,6 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                 function NgForm() {
                     this.onSubmitEvent = new core_1.EventEmitter();
                     this.value_check = [];
-                    this.checkRadioData = [];
                     this.name = "vehicles";
                 }
                 NgForm.prototype.ngOnInit = function () {
@@ -103,15 +102,7 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Object)
-                ], NgForm.prototype, "value", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
                 ], NgForm.prototype, "value_check", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Object)
-                ], NgForm.prototype, "checkRadioData", void 0);
                 NgForm = __decorate([
                     core_1.Component({
                         selector: 'ng-form',

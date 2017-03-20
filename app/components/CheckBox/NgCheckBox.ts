@@ -1,10 +1,13 @@
+/*
+** @anshul
+*/
+
 import {Component, Input, ,Output, EventEmitter} from "angular2/core";
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 @Component({
     selector: 'ng-checkbox'
     template: `
-            <h3>{{name}}</h3>
             <div *ngFor='#key of data'>
              <i [ngClass]="checkValue(key) ?'fa fa-check-square-o' : 'fa fa-square-o'"
                    style="font-size:20px"
@@ -45,13 +48,14 @@ export class NgCheckBox{
     }
     
     checkValue(key){
+        if(this.value != undefined)
         for(var i=0;i<this.value.length;i++){
             if(key.id==this.value[i]){
                 return true;
             }
         }
         return false;
-    }
+    }   
 
     ngOnInit(){
     }
