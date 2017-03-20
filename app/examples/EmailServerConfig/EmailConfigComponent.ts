@@ -39,7 +39,6 @@ import 'rxjs/Rx';
              [dialogActive]="dialogAddEditActive" 
           >
             <ng-form 
-              [gridData]="data" 
               [model]="properties" 
               [selectedRecord]="selectedRecord"
               (onSubmitEvent)="edit ? editEmailConfig($event) : addEmailConfig($event)" >
@@ -156,6 +155,17 @@ export class EmailConfigComponent {
   }
 
     editEmailConfig(record){
+      if(record.vehicleCheck == undefined)
+        record.vehicleCheck = [];
+      checkId = [];
+      for(var i=0;i<record.vehicleCheck.length;i++){
+        for(var j=0;j<this.checkRadioData.length;j++){
+          if(record.vehicleCheck[i] == this.checkRadioData[j].value){
+            checkId.push(this.checkRadioData[j].id);
+          }
+        }
+      }
+      console.log(checkId);
         let data = new URLSearchParams();
         data.append('id', record.id);
         data.append('smtpHost', record.smtpHost);
@@ -164,6 +174,7 @@ export class EmailConfigComponent {
         data.append('smtpPassword', record.smtpPassword);
         data.append('vehicleRadio', record.vehicleRadio);
         data.append('vehicleCheck', record.vehicleCheck);
+        data.append('checkId', checkId);
         data.append('email', "anshulgupta231193@gmail.com");
         var headers = new Headers();
         headers.append("Content-Type", "application/x-www-form-urlencoded");
@@ -177,6 +188,7 @@ export class EmailConfigComponent {
                 console.log(error.json());
             });
     }
+    
     addEmailConfig(record){
       if(record.vehicleCheck == undefined)
         record.vehicleCheck = [];

@@ -128,6 +128,17 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                 };
                 EmailConfigComponent.prototype.editEmailConfig = function (record) {
                     var _this = this;
+                    if (record.vehicleCheck == undefined)
+                        record.vehicleCheck = [];
+                    checkId = [];
+                    for (var i = 0; i < record.vehicleCheck.length; i++) {
+                        for (var j = 0; j < this.checkRadioData.length; j++) {
+                            if (record.vehicleCheck[i] == this.checkRadioData[j].value) {
+                                checkId.push(this.checkRadioData[j].id);
+                            }
+                        }
+                    }
+                    console.log(checkId);
                     var data = new http_1.URLSearchParams();
                     data.append('id', record.id);
                     data.append('smtpHost', record.smtpHost);
@@ -136,6 +147,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                     data.append('smtpPassword', record.smtpPassword);
                     data.append('vehicleRadio', record.vehicleRadio);
                     data.append('vehicleCheck', record.vehicleCheck);
+                    data.append('checkId', checkId);
                     data.append('email', "anshulgupta231193@gmail.com");
                     var headers = new http_1.Headers();
                     headers.append("Content-Type", "application/x-www-form-urlencoded");
@@ -186,7 +198,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', "app/servi
                 };
                 EmailConfigComponent = __decorate([
                     core_1.Component({
-                        template: "\n    <button type=\"button\" (click)=\"showAddPopup()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>\n                Add</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"showEditPopup()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"delete()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Delete</button>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n                [dialogActive]=\"dialogAddEditActive\"\n                [selectedRecord]=\"selectedRecord\"\n            >\n            </ng-grid>\n            <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n             [hidden]=\"!showError\"\n            >\n             <h3>Server Down</h3>\n          </ng-popup>\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogAddEditActive\" \n          >\n            <ng-form \n              [gridData]=\"data\" \n              [model]=\"properties\" \n              [selectedRecord]=\"selectedRecord\"\n              (onSubmitEvent)=\"edit ? editEmailConfig($event) : addEmailConfig($event)\" >\n            </ng-form>\n                 \n          </ng-popup>\n    ",
+                        template: "\n    <button type=\"button\" (click)=\"showAddPopup()\" class=\"btn btn-primary\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i>\n                Add</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"showEditPopup()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Edit</button>\n    <button [ngClass]=\"{disabled : !selectedRecord.id}\" (click)=\"delete()\" type=\"button\" class=\"btn btn-primary\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>\n                Delete</button>\n      <ng-grid \n                [title]=\"title\"\n                [data]=\"data\" \n                [columns]=\"columns\"\n                (onSelectionChange)=\"getSelectedRecord($event);\" \n                [dialogActive]=\"dialogAddEditActive\"\n                [selectedRecord]=\"selectedRecord\"\n            >\n            </ng-grid>\n            <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogActive\" \n             [hidden]=\"!showError\"\n            >\n             <h3>Server Down</h3>\n          </ng-popup>\n          <ng-popup\n             [title]=\"title\"\n             [dialogActive]=\"dialogAddEditActive\" \n          >\n            <ng-form \n              [model]=\"properties\" \n              [selectedRecord]=\"selectedRecord\"\n              (onSubmitEvent)=\"edit ? editEmailConfig($event) : addEmailConfig($event)\" >\n            </ng-form>\n                 \n          </ng-popup>\n    ",
                         directives: [common_1.CORE_DIRECTIVES, NgGrid_1.NgGrid, NgPopup_1.NgPopup, NgForm_1.NgForm],
                         providers: [EmailServerConfigService_1.EmailServerConfigService, http_1.HTTP_PROVIDERS]
                     }), 

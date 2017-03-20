@@ -57,23 +57,13 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                     if (!this.selectedRecord.id) {
                         this.selectedRecord.vehicleRadio = event.value;
                     }
-                    for (var i = 0; i < this.gridData.length; i++) {
-                        if (this.gridData[i].id == this.selectedRecord.id) {
-                            // this.gridData[i].vehicleRadio = event.value;
-                            this.selectedRecord.vehicleRadio = event.value;
-                        }
-                    }
+                    this.selectedRecord.vehicleRadio = event.value;
                 };
                 NgForm.prototype.getSelectedCheck = function (event) {
                     if (!this.selectedRecord.id) {
                         this.selectedRecord.vehicleCheck = event;
                     }
-                    for (var i = 0; i < this.gridData.length; i++) {
-                        if (this.gridData[i].id == this.selectedRecord.id) {
-                            // this.gridData[i].vehicleCheck = event;
-                            this.selectedRecord.vehicleCheck = event;
-                        }
-                    }
+                    this.selectedRecord.vehicleCheck = event;
                 };
                 NgForm.prototype.onSubmit = function (form) {
                     console.log(this.selectedRecord);
@@ -87,10 +77,6 @@ System.register(["angular2/core", "app/components/form/SelectComponent", "app/co
                     core_1.Input(), 
                     __metadata('design:type', Array)
                 ], NgForm.prototype, "model", void 0);
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', Array)
-                ], NgForm.prototype, "gridData", void 0);
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', Object)
